@@ -6,13 +6,14 @@
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 09:23:33 by anboisve          #+#    #+#             */
-/*   Updated: 2022/12/15 18:38:33 by anboisve         ###   ########.fr       */
+/*   Updated: 2022/12/15 18:58:02 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
 mlx_image_t	*g_img;
+mlx_image_t	*g_img2;
 
 mlx_image_t	*make_image(char *path, mlx_t *mlx)
 {
@@ -42,6 +43,38 @@ void	hook(void *param)
 		g_img->instances[0].x += 10;
 }
 
+void	ft_putbackground(mlx_t	*mlx)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	while (x < WIDTH)
+	{
+		y = 0;
+		while (y < HEIGHT)
+		{
+			if (y % 100 == 0)
+			{
+				if (x % 100 == 0)
+					mlx_image_to_window(mlx, g_img2, x, y);
+				else
+					mlx_image_to_window(mlx, g_img, x, y);
+			}
+			else
+			{
+				if (x % 100 == 0)
+					mlx_image_to_window(mlx, g_img, x, y);
+				else
+					mlx_image_to_window(mlx, g_img2, x, y);
+			}
+			y += 50;
+		}
+		x += IMAGE_SIZE;
+	}
+}
+
+
 int	main(void)
 {
 	mlx_t	*mlx;
@@ -53,7 +86,8 @@ int	main(void)
 	if (!mlx)
 		exit(EXIT_FAILURE);
 	g_img = make_image("pink.xpm42", mlx);
-	mlx_image_to_window(mlx, g_img, 0, 0);
+	g_img2 = make_image("black.xpm42", mlx);
+	ft_putbackground(mlx);
 	mlx_loop_hook(mlx, &hook, mlx);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
