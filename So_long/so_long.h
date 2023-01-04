@@ -6,7 +6,7 @@
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 18:19:42 by anboisve          #+#    #+#             */
-/*   Updated: 2022/12/15 10:50:34 by anboisve         ###   ########.fr       */
+/*   Updated: 2023/01/04 18:22:16 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,15 @@
 # include "MLX42/include/MLX42/MLX42.h"
 # include "libft/libft.h"
 
-# define WIDTH 1820
-# define HEIGHT 1080
 # define IMAGE_SIZE 50
+
+typedef struct s_data
+{
+	mlx_t		mlx;
+	mlx_image_t	*player;
+	mlx_image_t	*ground;
+	mlx_image_t	*wall;
+
+}	t_data;
 
 #endif // SO_LONG_H
