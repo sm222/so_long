@@ -6,9 +6,11 @@
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 18:19:42 by anboisve          #+#    #+#             */
-/*   Updated: 2023/01/04 18:22:16 by anboisve         ###   ########.fr       */
+/*   Updated: 2023/01/09 11:48:28 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+//https://github.com/Diego-Luna/42-Projects/blob/c04f26189422c2ff18bea20e155f2e16a5162adb/so_long/libs/so_long.h
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
@@ -17,18 +19,10 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <memory.h>
-# include "MLX42/include/MLX42/MLX42.h"
+# include <fcntl.h>
+# include <mlx.h>
 # include "libft/libft.h"
 
 # define IMAGE_SIZE 50
-
-typedef struct s_data
-{
-	mlx_t		mlx;
-	mlx_image_t	*player;
-	mlx_image_t	*ground;
-	mlx_image_t	*wall;
-
-}	t_data;
 
 #endif // SO_LONG_H

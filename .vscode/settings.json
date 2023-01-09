@@ -1,0 +1,8 @@
+{
+	"files.associations": {
+		"*.c": "c",
+		"so_long.h": "c",
+		"mlx.h": "c",
+		"stdlib.h": "c"
+	}
+}
