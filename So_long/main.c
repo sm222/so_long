@@ -6,45 +6,11 @@
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 09:23:33 by anboisve          #+#    #+#             */
-/*   Updated: 2023/01/09 18:00:28 by anboisve         ###   ########.fr       */
+/*   Updated: 2023/01/11 17:25:20 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-int	ft_valid_map(char *map_s)
-{
-	int		player;
-	int		colect;
-	int		e;
-	size_t	i;
-
-	colect = 0;
-	player = 0;
-	i = 0;
-	e = 0;
-	while (map_s[i])
-	{
-		if (map_s[i] == 'C')
-			colect++;
-		else if (map_s[i] == 'P')
-			player++;
-		else if (map_s[i] == 'E')
-			e++;
-		else if (map_s[i] != '1' && map_s[i] != '0' && map_s[i] != '\n')
-			return (-1);
-		i++;
-	}
-	printf("\n\n%d colect , %d player , %d exit\n", colect, player, e);
-	return (colect);
-}
-
-void	ft_error(const char *message)
-{
-	printf("Error!\n");
-	printf("%s\n", message);
-	exit(-1);
-}
 
 void	ft_look_name(char *file)
 {
@@ -55,46 +21,28 @@ void	ft_look_name(char *file)
 		ft_error("bad file name");
 }
 
-char	**ft_get_map(char *name)
-{
-	char	*s;
-	char	*tmp;
-	int		fd;
-
-	tmp = "so_long";
-	s = NULL;
-	ft_look_name(name);
-	fd = open(name, O_RDONLY);
-	if (fd >= 0)
-	{
-		while (tmp)
-		{
-			tmp = get_next_line(fd);
-			s = ft_strfjoin(s, tmp);
-			if (tmp)
-				free(tmp);
-		}
-		close(fd);
-	}
-	else
-		ft_error("can't open file");
-	printf("\nici%d \n", ft_valid_map(s));
-	return (ft_split(s, '\n'));
-}
-
 int	main(int ac, char **av)
 {
-	char	**map;
+	char	*map;
+	char	**new_map;
 	int		i;
+	int		colect;
 
 	i = 0;
+	new_map = NULL;
 	if (ac == 2)
-		map = ft_get_map(av[1]);
+		map = ft_get_map(av[1], &colect);
 	else
-		map = ft_get_map("map.ber");
+		map = ft_get_map("map.ber", &colect);
 	if (map != NULL)
-		while (map[i])
-			printf("%s\n", map[i++]);
+		new_map = ft_split(map, '\n');
+	if (new_map != NULL)
+		while (new_map[i])
+			printf("%s\n", new_map[i++]);
+	if (ft_look_side(new_map))
+		printf("\ngood\n");
+	else
+		printf("\nbad\n");
 }
 
 /*
