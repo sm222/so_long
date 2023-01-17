@@ -6,12 +6,17 @@
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 09:23:33 by anboisve          #+#    #+#             */
-/*   Updated: 2023/01/11 17:25:20 by anboisve         ###   ########.fr       */
+/*   Updated: 2023/01/17 17:27:58 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+/*
+	look for a file name that end with '.ber'
+		start form the end and return the addres in s
+		and use strncmp to see if the name match.
+*/
 void	ft_look_name(char *file)
 {
 	char	*s;
@@ -21,101 +26,62 @@ void	ft_look_name(char *file)
 		ft_error("bad file name");
 }
 
+int	test_key(int key, t_main *game)
+{
+	if (key == 53)
+	{
+		if (game->map_p)
+			ft_ft_double_sfree((void **)game->map_p);
+		mlx_destroy_window(game->mlx, game->win_p);
+		exit (0);
+	}
+	if (key == 13 && game->player_p)
+	{
+		mlx_destroy_image(game->mlx, game->player_p);
+		game->player_p = NULL;
+	}
+	else
+		printf("\n%d", key);
+	return (0);
+}
+
+int	ft_exit(t_main *game)
+{
+	if (game->map_p)
+		ft_ft_double_sfree((void **)game->map_p);
+	mlx_destroy_window(game->mlx, game->win_p);
+	exit(0);
+	return (0);
+}
+
+void	ft_start_game(t_main *data, int ac, char **av)
+{
+	data->map_p = NULL;
+	data->valid_map = NULL;
+	if (ac != 2)
+		data->valid_map = ft_get_map("map.ber", &data->colect);
+	else
+		data->valid_map = ft_get_map(av[1], &data->colect);
+	data->map_p = ft_split(data->valid_map, '\n');
+	if (data->valid_map)
+		data->valid_map = ft_safe_free(data->valid_map);
+	if (!ft_look_side(data->map_p, &data->m_x, &data->m_y))
+		ft_error("bad map");
+}
+
 int	main(int ac, char **av)
 {
-	char	*map;
-	char	**new_map;
+	t_main	game;
 	int		i;
-	int		colect;
 
 	i = 0;
-	new_map = NULL;
-	if (ac == 2)
-		map = ft_get_map(av[1], &colect);
-	else
-		map = ft_get_map("map.ber", &colect);
-	if (map != NULL)
-		new_map = ft_split(map, '\n');
-	if (new_map != NULL)
-		while (new_map[i])
-			printf("%s\n", new_map[i++]);
-	if (ft_look_side(new_map))
-		printf("\ngood\n");
-	else
-		printf("\nbad\n");
+	ft_start_game(&game, ac, av);
+	ft_make_image(&game, "player.xpm");
+	game.mlx = mlx_init();
+	game.win_p = mlx_new_window(game.mlx, game.m_x * PIC_S,
+			game.m_y * PIC_S, "so_long");
+	mlx_key_hook(game.win_p, test_key, &game);
+	mlx_hook(game.win_p, 17, 0, ft_exit, &game);
+	mlx_loop(game.mlx);
+	return (0);
 }
-
-/*
-mlx_image_t	*make_image(char *path, mlx_t *mlx)
-{
-	mlx_image_t	*image;
-	xpm_t		*xpm;
-
-	xpm = mlx_load_xpm42(path);
-	image = mlx_texture_to_image(mlx, &xpm->texture);
-	mlx_delete_xpm42(xpm);
-	return (image);
-}
-
-void	hook(void *param)
-{
-	mlx_t	*mlx;
-
-	mlx = param;
-	if (mlx_is_key_down(mlx, MLX_KEY_ESCAPE))
-		mlx_close_window(mlx);
-	if (mlx_is_key_down(mlx, MLX_KEY_UP) || mlx_is_key_down(mlx, MLX_KEY_W))
-		data->player->instances[0].y -= 50;
-	if (mlx_is_key_down(mlx, MLX_KEY_DOWN) || mlx_is_key_down(mlx, MLX_KEY_S))
-		data->player->instances[0].y += 50;
-	if (mlx_is_key_down(mlx, MLX_KEY_LEFT) || mlx_is_key_down(mlx, MLX_KEY_A))
-		data->player->instances[0].x -= 50;
-	if (mlx_is_key_down(mlx, MLX_KEY_RIGHT) || mlx_is_key_down(mlx, MLX_KEY_D))
-		data->player->instances[0].x += 50;
-}
-
-void	ft_putbackground(t_data	*data, int size_x, int size_y)
-{
-	int	y;
-	int	x;
-
-	x = 0;
-	while (x < size_x * 50)
-	{
-		y = 0;
-		while (y < size_y * 50)
-		{
-			if (y % 100 == 0 && x % 100 == 0)
-				mlx_image_to_window(data->mlx, data->wall, x, y);
-			else if (y % 100 == 0)
-				mlx_image_to_window(data->mlx, data->wall, x, y + IMAGE_SIZE);
-			y += IMAGE_SIZE;
-		}
-		x += IMAGE_SIZE;
-	}
-}
-
-int	main(void)
-{
-	int		x;
-	int		y;
-	mlx_t	*mlx;
-	t_data	data;
-
-	x = 50;
-	y = 10;
-	data.mlx = mlx_init();
-	data.game = mlx_new_winow(x * IMAGE_SIZE, y * IMAGE_SIZE, "test", false);
-	if (!data.mlx)
-		exit(EXIT_FAILURE);
-	data.player = make_image("player.xpm42", data.mlx);
-	data.ground = make_image("pink.xpm42", data.mlx);
-	ft_putbackground(&data, x, y);
-	mlx_image_to_window(data.mlx, data.player, 0, 0);
-	mlx_loop_hook(data.mlx, &hook, data.mlx);
-	//mlx_key_hook(mlx, hook, mlx);
-	mlx_loop(data.mlx);
-	mlx_terminate(data.mlx);
-	return (EXIT_SUCCESS);
-}
-*/

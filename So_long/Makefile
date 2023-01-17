@@ -1,4 +1,3 @@
-#gcc main.c MLX42/libmlx42.a libft/libft.a -I include -lglfw -L "/Users/$USER/.brew/opt/glfw/lib/" && ./a.out
 
 NAME	=	so_long
 LIBFT	=	libft.a
@@ -12,7 +11,8 @@ RM	=	rm -f
 # Sources are all .c files
 SRCS	=	main.c\
 			error.c\
-			map_ft.c
+			map_ft.c\
+			ft_image.c
 
 
 OBJS	=	$(SRCS:.c=.o)
@@ -22,7 +22,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	@ $(MAKE) -C MLX42/
 	@ $(MAKE) -C $(LDIR)
-	$(CC) $(CFLAGS) $(SRCS) MLX42/libmlx42.a $(LDIR)$(LIBFT) -I include -lglfw -L "/Users/$(USER)/.brew/opt/glfw/lib/" -o $(NAME)
+	$(CC) $(CFLAGS) $(SRCS) -lmlx -framework OpenGL -framework AppKit $(LDIR)$(LIBFT) -o $(NAME)
 
 # Removes objects
 clean:

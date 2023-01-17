@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_ft.h                                           :+:      :+:    :+:   */
+/*   ft_image.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/10 10:16:02 by anboisve          #+#    #+#             */
-/*   Updated: 2023/01/15 17:55:25 by anboisve         ###   ########.fr       */
+/*   Created: 2023/01/15 17:43:47 by anboisve          #+#    #+#             */
+/*   Updated: 2023/01/17 17:26:20 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAP_FT_H
-# define MAP_FT_H
-# include "so_long.h"
+#include "so_long.h"
 
-char	*ft_get_map(char *f_name, int *colect);
-int		ft_valid_all_side(char **map);
-int		ft_valid_map(char *map_s);
-int		ft_look_side(char **map, int *size_x, int *size_y);
+void	ft_make_image(t_main *game, char *name)
+{
+	int		x;
+	int		y;
 
-#endif 
+	game->player_p = mlx_xpm_file_to_image(game->mlx, name, &x, &y);
+}

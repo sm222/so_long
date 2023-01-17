@@ -6,7 +6,7 @@
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:10:53 by anboisve          #+#    #+#             */
-/*   Updated: 2023/01/10 10:50:02 by anboisve         ###   ########.fr       */
+/*   Updated: 2023/01/15 13:21:43 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,6 @@ void	ft_error(const char *message)
 
 void	ft_bad_map(char **map, const char *msg)
 {
-	size_t	i;
-
-	i = 0;
-	while (map[i])
-		free(map[i]);
-	free(map);
+	ft_ft_double_sfree((void **)map);
 	ft_error(msg);
 }
