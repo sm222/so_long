@@ -6,7 +6,7 @@
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 09:23:33 by anboisve          #+#    #+#             */
-/*   Updated: 2023/01/19 18:40:52 by anboisve         ###   ########.fr       */
+/*   Updated: 2023/01/20 12:56:36 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ void	ft_look_name(char *file)
 		ft_error("bad file name");
 }
 
-
-
 void	move_player(t_main *game, int new_x, int new_y)
 {
 	if (game->player_y + new_y > 0 && game->player_y
@@ -44,8 +42,6 @@ void	move_player(t_main *game, int new_x, int new_y)
 
 int	test_key(int key, t_main *game)
 {
-	mlx_clear_window(game->mlx, game->win_p);
-	print_map(game->m_p, game);
 	if (key == 53)
 	{
 		mlx_destroy_window(game->mlx, game->win_p);
@@ -59,8 +55,6 @@ int	test_key(int key, t_main *game)
 		move_player(game, 1, 0);
 	if (key == 0)
 		move_player(game, -1, 0);
-	mlx_put_image_to_window(game->mlx, game->win_p, game->player_p,
-		game->player_x, game->player_y);
 	return (0);
 }
 
@@ -117,9 +111,10 @@ int	main(int ac, char **av)
 	ft_start_game(ac, av, &map);
 	set_plaer_cord(&game);
 	game.mlx = mlx_init();
-	ft_make_image(&map, &game, "player.xpm");
+	ft_make_image(&map, &game);
 	game.win_p = mlx_new_window(game.mlx, map.m_x * PIC_S,
 			map.m_y * PIC_S, "so_long");
+	mlx_loop_hook(game.mlx, print_map, &game);
 	mlx_key_hook(game.win_p, test_key, &game);
 	mlx_hook(game.win_p, 17, 0, ft_exit, &game);
 	mlx_loop(game.mlx);

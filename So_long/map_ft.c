@@ -6,7 +6,7 @@
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:09:35 by anboisve          #+#    #+#             */
-/*   Updated: 2023/01/19 14:01:37 by anboisve         ###   ########.fr       */
+/*   Updated: 2023/01/20 11:44:53 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,8 @@ int	ft_valid_all_side(char **map)
 			return (0);
 		y++;
 	}
+	if (x > 51 || y > 26)
+		ft_error("map too big");
 	y--;
 	while (--x)
 		if (map[y][x] != '1')

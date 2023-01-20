@@ -6,7 +6,7 @@
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 18:19:42 by anboisve          #+#    #+#             */
-/*   Updated: 2023/01/19 18:42:01 by anboisve         ###   ########.fr       */
+/*   Updated: 2023/01/20 12:49:41 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@
 # include "map_ft.h"
 
 # define PIC_S 50
+# define IMAGE_FLORE "image/pink2.xpm"
+# define IMAGE_WALL "image/wall.xpm"
+# define IMAGE_PLAYER "image/player.xpm"
 
 void	ft_look_name(char *file);
 
@@ -58,8 +61,8 @@ typedef struct s_main
 	t_map		*m_p;
 }	t_main;
 
-void	ft_make_image(t_map *map, t_main *game, char *name);
-void	print_map(t_map *map, t_main *info);
+void	ft_make_image(t_map *map, t_main *game);
+int		print_map(t_main *info);
 
 #endif
 
