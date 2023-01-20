@@ -6,7 +6,7 @@
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:09:35 by anboisve          #+#    #+#             */
-/*   Updated: 2023/01/16 16:37:31 by anboisve         ###   ########.fr       */
+/*   Updated: 2023/01/19 14:01:37 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,29 +42,31 @@ int	ft_valid_map(char *map_s)
 
 char	*ft_get_map(char *f_name, int *colect)
 {
-	t_get_map	map_i;
+	char	*tmp;
+	char	*new;
+	int		fd;
 
-	map_i.tmp = "so_long";
-	map_i.s = NULL;
+	tmp = "so_long";
+	new = NULL;
 	ft_look_name(f_name);
-	map_i.fd = open(f_name, O_RDONLY);
-	if (map_i.fd >= 0)
+	fd = open(f_name, O_RDONLY);
+	if (fd >= 0)
 	{
-		while (map_i.tmp)
+		while (tmp)
 		{
-			map_i.tmp = get_next_line(map_i.fd);
-			map_i.s = ft_strfjoin(map_i.s, map_i.tmp);
-			if (map_i.tmp)
-				free(map_i.tmp);
+			tmp = get_next_line(fd);
+			new = ft_strfjoin(new, tmp);
+			if (tmp)
+				free(tmp);
 		}
-		close(map_i.fd);
+		close(fd);
 	}
 	else
 		ft_error("can't open file");
-	*colect = ft_valid_map(map_i.s);
+	*colect = ft_valid_map(new);
 	if (*colect > 0)
-		return (map_i.s);
-	return (ft_safe_free(map_i.s), NULL);
+		return (new);
+	return (ft_safe_free(new), NULL);
 }
 
 int	ft_look_side(char **map, int *size_x, int *size_y)
@@ -75,7 +77,7 @@ int	ft_look_side(char **map, int *size_x, int *size_y)
 		return (0);
 	i = 0;
 	*size_y = 1;
-	*size_x = ft_strlen(map[i]) + 1;
+	*size_x = ft_strlen(map[i]);
 	while (map[i] && map[i + 1])
 	{
 		if (ft_strlen(map[i]) == ft_strlen(map[i + 1]))

@@ -3,6 +3,9 @@
 		"*.c": "c",
 		"so_long.h": "c",
 		"mlx.h": "c",
-		"stdlib.h": "c"
+		"stdlib.h": "c",
+		"__tree": "c",
+		"map": "c",
+		"map_ft.h": "c"
 	}
 }

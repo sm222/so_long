@@ -20,7 +20,6 @@ all: $(NAME)
 
 # Generates output file
 $(NAME): $(OBJS)
-	@ $(MAKE) -C MLX42/
 	@ $(MAKE) -C $(LDIR)
 	$(CC) $(CFLAGS) $(SRCS) -lmlx -framework OpenGL -framework AppKit $(LDIR)$(LIBFT) -o $(NAME)
 
