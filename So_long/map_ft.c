@@ -6,7 +6,7 @@
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:09:35 by anboisve          #+#    #+#             */
-/*   Updated: 2023/01/20 11:44:53 by anboisve         ###   ########.fr       */
+/*   Updated: 2023/01/22 17:49:39 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,4 +112,9 @@ int	ft_valid_all_side(char **map)
 		if (map[y][x] != '1')
 			return (0);
 	return (1);
+}
+
+void	ft_clean_map(t_map *map)
+{
+	map->map_p = (char **)ft_ft_double_sfree((void **)map->map_p);
 }

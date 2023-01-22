@@ -6,7 +6,7 @@
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 09:23:33 by anboisve          #+#    #+#             */
-/*   Updated: 2023/01/20 12:56:36 by anboisve         ###   ########.fr       */
+/*   Updated: 2023/01/22 15:19:41 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,27 +26,20 @@ void	ft_look_name(char *file)
 		ft_error("bad file name");
 }
 
-void	move_player(t_main *game, int new_x, int new_y)
+int	ft_exit(t_main *game)
 {
-	if (game->player_y + new_y > 0 && game->player_y
-		/ PIC_S + new_y < game->m_p->m_y)
-	{
-		if (game->m_p->map_p[game->player_y / PIC_S + new_y]
-			[game->player_x / PIC_S + new_x] != '1')
-		{
-			game->player_x += new_x * PIC_S;
-			game->player_y += new_y * PIC_S;
-		}
-	}
+	if (game->mlx)
+		mlx_destroy_window(game->mlx, game->win_p);
+	if (game->m_p)
+		ft_clean_map(game->m_p);
+	exit(0);
+	return (0);
 }
 
-int	test_key(int key, t_main *game)
+int	player_input(int key, t_main *game)
 {
 	if (key == 53)
-	{
-		mlx_destroy_window(game->mlx, game->win_p);
-		exit (0);
-	}
+		ft_exit(game);
 	if (key == 13)
 		move_player(game, 0, -1);
 	if (key == 1)
@@ -55,13 +48,6 @@ int	test_key(int key, t_main *game)
 		move_player(game, 1, 0);
 	if (key == 0)
 		move_player(game, -1, 0);
-	return (0);
-}
-
-int	ft_exit(t_main *game)
-{
-	mlx_destroy_window(game->mlx, game->win_p);
-	exit(0);
 	return (0);
 }
 
@@ -80,34 +66,13 @@ void	ft_start_game(int ac, char **av, t_map *map)
 		ft_error("bad map");
 }
 
-void	set_plaer_cord(t_main *game)
-{
-	int	x;
-	int	y;
-
-	y = 0;
-	while (game->m_p->map_p[y])
-	{
-		x = 0;
-		while (game->m_p->map_p[y][x])
-		{
-			if (game->m_p->map_p[y][x] == 'P')
-			{
-				game->player_x = x * PIC_S;
-				game->player_y = y * PIC_S;
-			}
-			x++;
-		}
-		y++;
-	}
-}
-
 int	main(int ac, char **av)
 {
 	t_main		game;
 	t_map		map;
 
 	game.m_p = &map;
+	game.move = 0;
 	ft_start_game(ac, av, &map);
 	set_plaer_cord(&game);
 	game.mlx = mlx_init();
@@ -115,7 +80,7 @@ int	main(int ac, char **av)
 	game.win_p = mlx_new_window(game.mlx, map.m_x * PIC_S,
 			map.m_y * PIC_S, "so_long");
 	mlx_loop_hook(game.mlx, print_map, &game);
-	mlx_key_hook(game.win_p, test_key, &game);
+	mlx_key_hook(game.win_p, player_input, &game);
 	mlx_hook(game.win_p, 17, 0, ft_exit, &game);
 	mlx_loop(game.mlx);
 	return (0);
