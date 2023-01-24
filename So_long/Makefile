@@ -12,8 +12,9 @@ RM	=	rm -f
 SRCS	=	main.c\
 			error.c\
 			map_ft.c\
+			player.c\
 			ft_image.c\
-			player.c
+			ft_flood.c
 
 
 OBJS	=	$(SRCS:.c=.o)

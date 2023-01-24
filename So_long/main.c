@@ -6,7 +6,7 @@
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 09:23:33 by anboisve          #+#    #+#             */
-/*   Updated: 2023/01/22 15:19:41 by anboisve         ###   ########.fr       */
+/*   Updated: 2023/01/24 10:56:06 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,10 @@ int	main(int ac, char **av)
 
 	game.m_p = &map;
 	game.move = 0;
+	game.frame = 0;
 	ft_start_game(ac, av, &map);
 	set_plaer_cord(&game);
+	ft_playable(&game);
 	game.mlx = mlx_init();
 	ft_make_image(&map, &game);
 	game.win_p = mlx_new_window(game.mlx, map.m_x * PIC_S,

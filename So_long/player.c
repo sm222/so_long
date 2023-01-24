@@ -6,7 +6,7 @@
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 11:53:49 by anboisve          #+#    #+#             */
-/*   Updated: 2023/01/22 18:00:01 by anboisve         ###   ########.fr       */
+/*   Updated: 2023/01/24 11:08:37 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,14 @@ void	move_player(t_main *game, int new_x, int new_y)
 			game->move++;
 			printf("move %zu\n", game->move);
 			if (game->m_p->map_p[game->player_y / PIC_S]
-				[game->player_x / PIC_S] == 'C')
+				[game->player_x / PIC_S] == '3')
 			{
 				game->m_p->map_p[game->player_y / PIC_S]
 				[game->player_x / PIC_S] = '0';
 				game->m_p->collect--;
 			}
 			if (game->m_p->map_p[game->player_y / PIC_S]
-				[game->player_x / PIC_S] == 'E'
+				[game->player_x / PIC_S] == 'e'
 				&& game->m_p->collect <= 0)
 				ft_exit(game);
 		}

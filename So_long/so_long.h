@@ -6,7 +6,7 @@
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 18:19:42 by anboisve          #+#    #+#             */
-/*   Updated: 2023/01/22 16:06:08 by anboisve         ###   ########.fr       */
+/*   Updated: 2023/01/24 11:04:05 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,12 @@
 # define IMAGE_FLORE "image/pink2.xpm"
 # define IMAGE_WALL "image/wall.xpm"
 # define IMAGE_PLAYER "image/player.xpm"
+# define IMAGE_V1 "image/vinyl1.xpm"
+# define IMAGE_V2 "image/vinyl2.xpm"
+# define IMAGE_V3 "image/vinyl3.xpm"
+# define IMAGE_V4 "image/vinyl4.xpm"
+# define IMAGE_V5 "image/vinyl5.xpm"
+# define IMAGE_V6 "image/vinyl6.xpm"
 
 typedef struct s_map
 {
@@ -36,11 +42,12 @@ typedef struct s_map
 	int		m_x;
 	int		m_y;
 	int		collect;
+	int		exit_swich;
 	char	**map_p;
 	char	*valid_map;
 	void	*img_flore;
 	void	*img_wall;
-	void	*img_col;
+	void	*img_col[6];
 	void	*img_exit;
 }	t_map;
 
@@ -52,11 +59,7 @@ typedef struct s_main
 	int			player_x;
 	int			player_y;
 	size_t		move;
-	int			player_2;
-	int			player_3;
-	int			player_4;
-	int			player_5;
-	int			player_6;
+	int			frame;
 	t_map		*m_p;
 }	t_main;
 
@@ -69,5 +72,6 @@ int		print_map(t_main *info);
 void	move_player(t_main *game, int new_x, int new_y);
 void	ft_clean_map(t_map *map);
 int		ft_exit(t_main *game);
+int		ft_playable(t_main *info);
 
 #endif
