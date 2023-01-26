@@ -6,6 +6,11 @@
 		"stdlib.h": "c",
 		"__tree": "c",
 		"map": "c",
-		"map_ft.h": "c"
+		"map_ft.h": "c",
+		"errno.h": "c",
+		"err.h": "c",
+		"memory.h": "c",
+		"unistd.h": "c",
+		"stdio.h": "c"
 	}
 }

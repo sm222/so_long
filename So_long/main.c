@@ -6,7 +6,7 @@
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 09:23:33 by anboisve          #+#    #+#             */
-/*   Updated: 2023/01/24 10:56:06 by anboisve         ###   ########.fr       */
+/*   Updated: 2023/01/26 13:35:05 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int	ft_exit(t_main *game)
 		mlx_destroy_window(game->mlx, game->win_p);
 	if (game->m_p)
 		ft_clean_map(game->m_p);
+	if (game->s)
+		free(game->s);
 	exit(0);
 	return (0);
 }
@@ -40,13 +42,13 @@ int	player_input(int key, t_main *game)
 {
 	if (key == 53)
 		ft_exit(game);
-	if (key == 13)
+	if (key == 13 || key == 126)
 		move_player(game, 0, -1);
-	if (key == 1)
+	if (key == 1 || key == 125)
 		move_player(game, 0, 1);
-	if (key == 2)
+	if (key == 2 || key == 124)
 		move_player(game, 1, 0);
-	if (key == 0)
+	if (key == 0 || key == 123)
 		move_player(game, -1, 0);
 	return (0);
 }
