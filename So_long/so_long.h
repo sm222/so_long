@@ -6,7 +6,7 @@
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 18:19:42 by anboisve          #+#    #+#             */
-/*   Updated: 2023/01/26 15:50:24 by anboisve         ###   ########.fr       */
+/*   Updated: 2023/01/27 10:52:17 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,14 @@
 # include "libft/libft.h"
 # include "error.h"
 
-# define PIC_S 50
+//			Define			//
 
+# define PIC_S 50
+# define D_MAP "maps/map.ber"
+
+//		art		//
+
+//	vinyl	//
 # define IMAGE_V1 "image/vinyl1.xpm"
 # define IMAGE_V2 "image/vinyl2.xpm"
 # define IMAGE_V3 "image/vinyl3.xpm"
@@ -31,14 +37,19 @@
 # define IMAGE_V5 "image/vinyl5.xpm"
 # define IMAGE_V6 "image/vinyl6.xpm"
 
+//	prop	//
 # define IMAGE_EXIT "image/exit.xpm"
-# define IMAGE_FLORE "image/flore.xpm"
-
 # define IMAGE_WALL "image/wall1.xpm"
 # define IMAGE_WALL1 "image/wall2.xpm"
 # define IMAGE_WALL2 "image/wall3.xpm"
 
+//	player	//
 # define IMAGE_PLAYER "image/player.xpm"
+
+//	other	//
+# define IMAGE_FLORE "image/flore.xpm"
+
+//			struct			//
 
 typedef struct s_map
 {
@@ -70,6 +81,8 @@ typedef struct s_main
 	t_map		*m_p;
 }	t_main;
 
+//			ft			//
+
 // pre-game
 void	ft_look_name(char *file);
 void	ft_make_image(t_map *map, t_main *game);
@@ -84,6 +97,7 @@ char	*ft_get_map(char *f_name, int *colect);
 int		ft_valid_all_side(char **map);
 int		ft_valid_map(char *map_s);
 int		ft_look_side(char **map, int *size_x, int *size_y);
+void	ft_put_tile(t_main *info, int x, int y, void *img);
 
 int		new_trgb(int t, int r, int g, int b);
 

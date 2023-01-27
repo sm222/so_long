@@ -6,7 +6,7 @@
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 09:23:33 by anboisve          #+#    #+#             */
-/*   Updated: 2023/01/26 13:35:05 by anboisve         ###   ########.fr       */
+/*   Updated: 2023/01/27 11:32:47 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	ft_start_game(int ac, char **av, t_map *map)
 	map->valid_map = NULL;
 	map->map_p = NULL;
 	if (ac != 2)
-		map->valid_map = ft_get_map("map.ber", &map->collect);
+		map->valid_map = ft_get_map(D_MAP, &map->collect);
 	else
 		map->valid_map = ft_get_map(av[1], &map->collect);
 	map->map_p = ft_split(map->valid_map, '\n');
@@ -87,5 +87,6 @@ int	main(int ac, char **av)
 	mlx_key_hook(game.win_p, player_input, &game);
 	mlx_hook(game.win_p, 17, 0, ft_exit, &game);
 	mlx_loop(game.mlx);
+	system("leaks checker");
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 17:43:47 by anboisve          #+#    #+#             */
-/*   Updated: 2023/01/26 17:46:03 by anboisve         ###   ########.fr       */
+/*   Updated: 2023/01/27 10:42:40 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,6 @@ void	ft_make_image(t_map *map, t_main *game)
 	map->img_col[4] = mlx_xpm_file_to_image(game->mlx, IMAGE_V5, &x, &y);
 	map->img_col[5] = mlx_xpm_file_to_image(game->mlx, IMAGE_V6, &x, &y);
 	map->img_exit = mlx_xpm_file_to_image(game->mlx, IMAGE_EXIT, &x, &y);
-}
-
-void	ft_put_tile(t_main *info, int x, int y, void *img)
-{
-	mlx_put_image_to_window(info->mlx, info->win_p, img,
-		x * PIC_S, y * PIC_S);
 }
 
 void	put_text_window(t_main *info)
