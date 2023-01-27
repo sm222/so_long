@@ -6,7 +6,7 @@
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 17:43:47 by anboisve          #+#    #+#             */
-/*   Updated: 2023/01/27 10:42:40 by anboisve         ###   ########.fr       */
+/*   Updated: 2023/01/27 14:46:01 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	put_text_window(t_main *info)
 
 	color = new_trgb(255, 0, 255, 0);
 	info->s = ft_itoa(info->move);
-	new = ft_strjoin("move ", info->s);
+	new = ft_strjoin(NAME " ", info->s);
 	mlx_string_put(info->mlx, info->win_p, info->player_x - 10,
 		info->player_y - PIC_S / 2, color, new);
 	if (info->s)

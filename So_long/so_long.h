@@ -6,7 +6,7 @@
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 18:19:42 by anboisve          #+#    #+#             */
-/*   Updated: 2023/01/27 10:52:17 by anboisve         ###   ########.fr       */
+/*   Updated: 2023/01/27 14:57:39 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,10 @@
 
 # define PIC_S 50
 # define D_MAP "maps/map.ber"
+
+# ifndef NAME
+#  define NAME "anboisve"
+# endif
 
 //		art		//
 

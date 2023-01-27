@@ -6,7 +6,7 @@
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 09:23:33 by anboisve          #+#    #+#             */
-/*   Updated: 2023/01/27 11:32:47 by anboisve         ###   ########.fr       */
+/*   Updated: 2023/01/27 14:56:07 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int	main(int ac, char **av)
 	game.win_p = mlx_new_window(game.mlx, map.m_x * PIC_S,
 			map.m_y * PIC_S, "so_long");
 	mlx_loop_hook(game.mlx, print_map, &game);
-	mlx_key_hook(game.win_p, player_input, &game);
+	mlx_hook(game.win_p, 02, 0L, player_input, &game);
 	mlx_hook(game.win_p, 17, 0, ft_exit, &game);
 	mlx_loop(game.mlx);
 	system("leaks checker");
