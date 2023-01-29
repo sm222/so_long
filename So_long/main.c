@@ -6,7 +6,7 @@
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 09:23:33 by anboisve          #+#    #+#             */
-/*   Updated: 2023/01/27 14:56:07 by anboisve         ###   ########.fr       */
+/*   Updated: 2023/01/29 13:54:50 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,25 +23,46 @@ void	ft_look_name(char *file)
 
 	s = ft_strrchr(file, '.');
 	if (!s || ft_strncmp(s, ".ber", ft_strlen(s) + 1) != 0)
-		ft_error("bad file name");
+		ft_error("bad file name", 1);
 }
 
-int	ft_exit(t_main *game)
+/*
+	set all value to null
+*/
+void	ft_null(t_main *game)
 {
-	if (game->mlx)
-		mlx_destroy_window(game->mlx, game->win_p);
-	if (game->m_p)
-		ft_clean_map(game->m_p);
-	if (game->s)
-		free(game->s);
-	exit(0);
-	return (0);
+	int	i;
+
+	game->s = NULL;
+	game->mlx = NULL;
+	game->win_p = NULL;
+	game->m_p->s = NULL;
+	game->m_p->tmp = NULL;
+	game->img_player = NULL;
+	game->img_player = NULL;
+	game->m_p->map_p = NULL;
+	game->m_p->img_exit = NULL;
+	game->m_p->valid_map = NULL;
+	game->m_p->img_flore = NULL;
+	i = 6;
+	while (i--)
+		game->m_p->img_col[i] = NULL;
+	i = 3;
+	while (i--)
+		game->m_p->img_wall[i] = NULL;
 }
 
+/*
+	get player input
+		13 || 126 = up
+		1  || 125 = down
+		2  || 124 = rigth
+		0  || 123 = left
+*/
 int	player_input(int key, t_main *game)
 {
 	if (key == 53)
-		ft_exit(game);
+		ft_exit(game, "goodbye!", 0);
 	if (key == 13 || key == 126)
 		move_player(game, 0, -1);
 	if (key == 1 || key == 125)
@@ -53,19 +74,26 @@ int	player_input(int key, t_main *game)
 	return (0);
 }
 
-void	ft_start_game(int ac, char **av, t_map *map)
+/*
+	start by seting all to NULL
+	get the map information and do the parsing
+*/
+void	ft_start_game(int ac, char **av, t_main *info)
 {
-	map->valid_map = NULL;
-	map->map_p = NULL;
+	ft_null(info);
 	if (ac != 2)
-		map->valid_map = ft_get_map(D_MAP, &map->collect);
+		info->m_p->valid_map = ft_get_map(D_MAP, &info->m_p->collect, info);
 	else
-		map->valid_map = ft_get_map(av[1], &map->collect);
-	map->map_p = ft_split(map->valid_map, '\n');
-	if (map->valid_map)
-		map->valid_map = ft_safe_free(map->valid_map);
-	if (!ft_look_side(map->map_p, &map->m_x, &map->m_y))
-		ft_error("bad map");
+		info->m_p->valid_map = ft_get_map(av[1], &info->m_p->collect, info);
+	if (!info->m_p->valid_map)
+		ft_exit(info, ERR_MALLOC "ft_get_map", 0);
+	info->m_p->map_p = ft_split(info->m_p->valid_map, '\n');
+	if (!info->m_p->map_p)
+		ft_exit(info, ERR_MALLOC "ft_split", 0);
+	if (info->m_p->valid_map)
+		info->m_p->valid_map = ft_safe_free(info->m_p->valid_map);
+	if (!ft_look_side(info, &info->m_p->m_x, &info->m_p->m_y))
+		ft_exit(info, "invalid map", 1);
 }
 
 int	main(int ac, char **av)
@@ -76,17 +104,16 @@ int	main(int ac, char **av)
 	game.m_p = &map;
 	game.move = 0;
 	game.frame = 0;
-	ft_start_game(ac, av, &map);
+	ft_start_game(ac, av, &game);
 	set_plaer_cord(&game);
 	ft_playable(&game);
 	game.mlx = mlx_init();
 	ft_make_image(&map, &game);
-	game.win_p = mlx_new_window(game.mlx, map.m_x * PIC_S,
-			map.m_y * PIC_S, "so_long");
+	game.win_p = mlx_new_window(game.mlx, map.m_x * PIC_S, \
+	map.m_y * PIC_S, "so_long");
 	mlx_loop_hook(game.mlx, print_map, &game);
 	mlx_hook(game.win_p, 02, 0L, player_input, &game);
 	mlx_hook(game.win_p, 17, 0, ft_exit, &game);
 	mlx_loop(game.mlx);
-	system("leaks checker");
 	return (0);
 }

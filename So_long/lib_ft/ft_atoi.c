@@ -1,30 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/10 10:10:53 by anboisve          #+#    #+#             */
-/*   Updated: 2023/01/29 11:27:36 by anboisve         ###   ########.fr       */
+/*   Created: 2022/10/21 17:01:20 by anboisve          #+#    #+#             */
+/*   Updated: 2022/11/03 18:17:51 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "error.h"
+#include "libft.h"
 
-void	ft_error(const char *message, int error)
+int	ft_atoi(const char *str)
 {
-	if (error)
-		printf("Error!\n");
-	printf("%s\n", message);
-	exit(0);
-}
+	int	i;
+	int	flp;
+	int	val;
 
-int	ft_exit(t_main *game, const char *message, int error)
-{
-	if (game->mlx)
-		mlx_destroy_window(game->mlx, game->win_p);
-	ft_free_all(game);
-	ft_error(message, error);
-	return (0);
+	if (!str)
+		return (0);
+	val = 0;
+	flp = 1;
+	i = 0;
+	while ((str[i] >= '\t' && str[i] <= '\r') || str[i] == ' ')
+		i++;
+	if (str[i] == '-' || str[i] == '+')
+	{
+		if (str[i] == '-')
+			flp *= -1;
+		i++;
+	}
+	while (str[i] >= '0' && str[i] <= '9')
+		val = val * 10 + (str[i++] - '0');
+	return (val * flp);
 }

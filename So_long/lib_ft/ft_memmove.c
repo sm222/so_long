@@ -1,30 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/10 10:10:53 by anboisve          #+#    #+#             */
-/*   Updated: 2023/01/29 11:27:36 by anboisve         ###   ########.fr       */
+/*   Created: 2022/10/19 09:46:35 by anboisve          #+#    #+#             */
+/*   Updated: 2022/12/07 17:13:06 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "error.h"
+#include "libft.h"
 
-void	ft_error(const char *message, int error)
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	if (error)
-		printf("Error!\n");
-	printf("%s\n", message);
-	exit(0);
-}
+	size_t	i;
 
-int	ft_exit(t_main *game, const char *message, int error)
-{
-	if (game->mlx)
-		mlx_destroy_window(game->mlx, game->win_p);
-	ft_free_all(game);
-	ft_error(message, error);
-	return (0);
+	i = 0;
+	if (dst == NULL || src == NULL)
+		return (NULL);
+	if (src < dst)
+		while (len-- > 0)
+			((char *)dst)[len] = ((char *)src)[len];
+	else
+		ft_memcpy(dst, src, len);
+	return (dst);
 }

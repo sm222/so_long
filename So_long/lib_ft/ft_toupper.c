@@ -1,30 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/10 10:10:53 by anboisve          #+#    #+#             */
-/*   Updated: 2023/01/29 11:27:36 by anboisve         ###   ########.fr       */
+/*   Created: 2022/10/21 10:43:18 by anboisve          #+#    #+#             */
+/*   Updated: 2022/12/07 11:53:43 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "error.h"
-
-void	ft_error(const char *message, int error)
+int	ft_toupper(int c)
 {
-	if (error)
-		printf("Error!\n");
-	printf("%s\n", message);
-	exit(0);
-}
-
-int	ft_exit(t_main *game, const char *message, int error)
-{
-	if (game->mlx)
-		mlx_destroy_window(game->mlx, game->win_p);
-	ft_free_all(game);
-	ft_error(message, error);
-	return (0);
+	if (c >= 'a' && c <= 'z')
+		return (c - 32);
+	return (c);
 }

@@ -6,17 +6,15 @@ MAG		=	"\x1B[35m"
 CYN		=	"\x1B[36m"
 WHT		=	"\x1B[37m"
 RESET	=	"\x1B[0m"
-ORG		=	"\x1b[38;5;202m"
-PIK		=	"\x1b[38;5;176m"
 CLE 	=	\e[1;1H\e[2J
 
 NAME	=	so_long
 LIBFT	=	libft.a
-LDIR	=	libft/
+LDIR	=	lib_ft/
 
 # Compiler and flags
 CC		=	gcc
-CFLAGS	=	-Wall -Werror -Wextra
+CFLAGS	=	-Wall -Werror -Wextra -g
 RM	=	rm	-f
 
 #-fsanitize=address
@@ -35,12 +33,14 @@ OBJS	=	$(SRCS:.c=.o)
 USER = $(shell whoami)
 
 all: $(NAME)
+	@ echo $(shell reset)$(GRN)
+	@ echo "				so_long made by anboisve\n " $(RESET)
 	@ cat logo.txt
-	@ echo "\n\n			correction is made by $(USER)\n\n"
+	@ echo $(CYN) "\n\n			correction is made by $(USER)\n\n " $(RESET)
 # Generates output file
 $(NAME): $(OBJS)
 	@ $(MAKE) -C $(LDIR)
-	$(CC) $(CFLAGS) $(SRCS) -lmlx -framework OpenGL -framework AppKit $(LDIR)$(LIBFT) -o $(NAME) -D NAME=\"$(USER)\"
+	@ $(CC) $(CFLAGS) $(SRCS) -lmlx -framework OpenGL -framework AppKit $(LDIR)$(LIBFT) -o $(NAME) -D NAME=\"$(USER)\"
 
 # Removes objects
 clean:
@@ -54,6 +54,10 @@ fclean: clean
 	$(RM) $(LDIR)$(LIBFT)
 	@ echo $(shell clear) $(GRN) clean all$(RESET)
 
+run: re all
+	@ ./so_long
 
+mem: all
+	leaks -atExit -- ./so_long
 # Removes objects and executables and remakes
 re: fclean all

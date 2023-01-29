@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/10 10:10:53 by anboisve          #+#    #+#             */
-/*   Updated: 2023/01/29 11:27:36 by anboisve         ###   ########.fr       */
+/*   Created: 2022/10/21 19:19:59 by anboisve          #+#    #+#             */
+/*   Updated: 2023/01/09 11:33:09 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "error.h"
+#include "libft.h"
 
-void	ft_error(const char *message, int error)
+char	*ft_strrchr(const char *s, int c)
 {
-	if (error)
-		printf("Error!\n");
-	printf("%s\n", message);
-	exit(0);
-}
+	size_t	i;
 
-int	ft_exit(t_main *game, const char *message, int error)
-{
-	if (game->mlx)
-		mlx_destroy_window(game->mlx, game->win_p);
-	ft_free_all(game);
-	ft_error(message, error);
-	return (0);
+	if (!s)
+		return (NULL);
+	i = ft_strlen(s);
+	while (i >= 0)
+	{
+		if (((char *)s)[i] == (char)c)
+			return (((char *)s) + i);
+		i--;
+	}
+	return (NULL);
 }

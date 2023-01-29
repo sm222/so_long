@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/10 10:10:53 by anboisve          #+#    #+#             */
-/*   Updated: 2023/01/29 11:27:36 by anboisve         ###   ########.fr       */
+/*   Created: 2022/10/21 09:18:25 by anboisve          #+#    #+#             */
+/*   Updated: 2022/11/03 20:20:04 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "error.h"
+#include "libft.h"
 
-void	ft_error(const char *message, int error)
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	if (error)
-		printf("Error!\n");
-	printf("%s\n", message);
-	exit(0);
-}
+	size_t	s;
 
-int	ft_exit(t_main *game, const char *message, int error)
-{
-	if (game->mlx)
-		mlx_destroy_window(game->mlx, game->win_p);
-	ft_free_all(game);
-	ft_error(message, error);
-	return (0);
+	if (!dst || !src)
+		return (0);
+	s = ft_strlen(src);
+	if (s + 1 < dstsize)
+		ft_memcpy(dst, ((char *)src), s + 1);
+	else if (dstsize != 0)
+	{
+		ft_memcpy(dst, ((char *)src), dstsize - 1);
+		dst[dstsize - 1] = '\0';
+	}
+	return (s);
 }

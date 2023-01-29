@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/10 10:10:53 by anboisve          #+#    #+#             */
-/*   Updated: 2023/01/29 11:27:36 by anboisve         ###   ########.fr       */
+/*   Created: 2022/10/24 14:33:50 by anboisve          #+#    #+#             */
+/*   Updated: 2022/11/17 10:17:04 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "error.h"
-
-void	ft_error(const char *message, int error)
+#include "libft.h"
+//redo
+char	*ft_strtrim(char const *s1, char const *set)
 {
-	if (error)
-		printf("Error!\n");
-	printf("%s\n", message);
-	exit(0);
-}
+	size_t	s_i;
+	size_t	s_j;
 
-int	ft_exit(t_main *game, const char *message, int error)
-{
-	if (game->mlx)
-		mlx_destroy_window(game->mlx, game->win_p);
-	ft_free_all(game);
-	ft_error(message, error);
-	return (0);
+	if (!s1 || !set)
+		return (NULL);
+	s_i = 0;
+	s_j = ft_strlen(s1);
+	if (s1[0] == 0)
+		return (ft_strdup(s1));
+	while (ft_strchr(set, (int)s1[s_i]) != NULL && s_i <= s_j)
+		s_i++;
+	while (ft_strchr(set, (int)s1[s_j]) != NULL && s_i <= s_j)
+		s_j--;
+	return (ft_substr(s1, s_i, (s_j - s_i + 1)));
 }

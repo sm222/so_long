@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   index.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/10 10:10:53 by anboisve          #+#    #+#             */
-/*   Updated: 2023/01/29 11:27:36 by anboisve         ###   ########.fr       */
+/*   Created: 2022/12/15 10:19:00 by anboisve          #+#    #+#             */
+/*   Updated: 2022/12/15 10:34:17 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "error.h"
+#ifndef INDEX_H
+# define INDEX_H
 
-void	ft_error(const char *message, int error)
-{
-	if (error)
-		printf("Error!\n");
-	printf("%s\n", message);
-	exit(0);
-}
+# include "unistd.h"
 
-int	ft_exit(t_main *game, const char *message, int error)
+typedef struct s_index
 {
-	if (game->mlx)
-		mlx_destroy_window(game->mlx, game->win_p);
-	ft_free_all(game);
-	ft_error(message, error);
-	return (0);
-}
+	int		x[100];
+	int		y[100];
+	size_t	i;
+	size_t	j;
+	size_t	k;
+}	t_index;
+
+#endif 

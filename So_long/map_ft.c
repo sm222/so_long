@@ -6,7 +6,7 @@
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:09:35 by anboisve          #+#    #+#             */
-/*   Updated: 2023/01/27 10:41:42 by anboisve         ###   ########.fr       */
+/*   Updated: 2023/01/29 11:34:29 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,76 +40,77 @@ int	ft_valid_map(char *map_s)
 	return (colect);
 }
 
-char	*ft_get_map(char *f_name, int *colect)
+char	*ft_get_map(char *f_name, int *colect, t_main *info)
 {
-	char	*tmp;
-	char	*new;
-	int		fd;
+	t_get_map	data;
 
-	tmp = "so_long";
-	new = NULL;
+	data.tmp = "so_long";
+	data.new = NULL;
 	ft_look_name(f_name);
-	fd = open(f_name, O_RDONLY);
-	if (fd >= 0)
+	data.fd = open(f_name, O_RDONLY);
+	if (data.fd >= 0)
 	{
-		while (tmp)
+		while (data.tmp)
 		{
-			tmp = get_next_line(fd);
-			new = ft_strfjoin(new, tmp);
-			if (tmp)
-				free(tmp);
+			data.tmp = get_next_line(data.fd);
+			data.new = ft_strfjoin(data.new, data.tmp);
+			if (data.tmp)
+				ft_safe_free(data.tmp);
 		}
-		close(fd);
+		close(data.fd);
 	}
 	else
-		ft_error("can't open file");
-	*colect = ft_valid_map(new);
+		ft_exit(info, "can't open map", 1);
+	*colect = ft_valid_map(data.new);
 	if (*colect > 0)
-		return (new);
-	return (ft_safe_free(new), NULL);
+		return (data.new);
+	return (data.new = ft_safe_free(data.new), NULL);
 }
 
-int	ft_look_side(char **map, int *size_x, int *size_y)
+int	ft_look_side(t_main *game, int *size_x, int *size_y)
 {
 	int	i;
 
-	if (!map)
+	if (!game->m_p->map_p)
 		return (0);
 	i = 0;
 	*size_y = 1;
-	*size_x = ft_strlen(map[i]);
-	while (map[i] && map[i + 1])
+	*size_x = ft_strlen(game->m_p->map_p[i]);
+	while (game->m_p->map_p[i] && game->m_p->map_p[i + 1])
 	{
-		if (ft_strlen(map[i]) == ft_strlen(map[i + 1]))
+		if (ft_strlen(game->m_p->map_p[i]) \
+		== ft_strlen(game->m_p->map_p[i + 1]))
 			i++;
 		else
 			return (0);
 		(*size_y)++;
 	}
-	return (ft_valid_all_side(map));
+	return (ft_valid_all_side(game));
 }
 
-int	ft_valid_all_side(char **map)
+int	ft_valid_all_side(t_main *game)
 {
 	int	x;
 	int	y;
 
 	x = 0;
 	y = 1;
-	while (map[0][x])
-		if (map[0][x++] != '1')
+	while (game->m_p->map_p[0][x])
+		if (game->m_p->map_p[0][x++] != '1')
 			return (0);
-	while (map[y])
+	while (game->m_p->map_p[y])
 	{
-		if (map[y][0] != '1' || map[y][x - 1] != '1')
+		if (game->m_p->map_p[y][0] != '1' || game->m_p->map_p[y][x - 1] != '1')
 			return (0);
 		y++;
 	}
 	if (x > 51 || y > 26)
-		ft_bad_map(map, "map is too big, need to be, x < 51, y < 26");
+	{
+		ft_exit(game, "map is too big, need to be smaller that x 51 y 26", 1);
+	}
 	y--;
 	while (--x)
-		if (map[y][x] != '1')
+		if (game->m_p->map_p[y][x] != '1')
 			return (0);
 	return (1);
 }

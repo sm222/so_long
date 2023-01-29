@@ -6,7 +6,7 @@
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:49:27 by anboisve          #+#    #+#             */
-/*   Updated: 2023/01/27 10:32:50 by anboisve         ###   ########.fr       */
+/*   Updated: 2023/01/29 10:43:12 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 
 //			ft			//
 
-void	ft_error(const char *message);
-void	ft_bad_map(char **map, const char *msg);
+void	ft_error(const char *message, int error);
 
 #endif // ERROR_H
