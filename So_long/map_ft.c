@@ -6,38 +6,38 @@
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:09:35 by anboisve          #+#    #+#             */
-/*   Updated: 2023/01/29 16:33:31 by anboisve         ###   ########.fr       */
+/*   Updated: 2023/01/29 17:59:22 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	ft_valid_map(char *map_s)
+int	ft_valid_map(t_main *game, char *map_s)
 {
-	int		player;
-	int		colect;
-	int		e;
-	size_t	i;
+	t_valid_map	var;
 
-	colect = 0;
-	player = 0;
-	i = 0;
-	e = 0;
-	while (map_s && map_s[i])
+	var.colect = 0;
+	var.player = 0;
+	var.i = -1;
+	var.e = 0;
+	while (map_s && map_s[++var.i])
 	{
-		if (map_s[i] == 'C')
-			colect++;
-		else if (map_s[i] == 'P')
-			player++;
-		else if (map_s[i] == 'E')
-			e++;
-		else if (map_s[i] != '1' && map_s[i] != '0' && map_s[i] != '\n')
-			return (-1);
-		i++;
+		if (map_s[var.i] == 'C')
+			var.colect++;
+		if (map_s[var.i] == 'P')
+			var.player++;
+		if (map_s[var.i] == 'E')
+			var.e++;
+		if (map_s[var.i] != '1' && map_s[var.i] \
+		!= '0' && map_s[var.i] != '\n')
+		{
+			var.invalid[0] = map_s[var.i];
+			ft_exit(game, "is a invalid caracter", 1);
+		}
 	}
-	if (colect == 0 || player != 1 || e != 1)
-		return (0);
-	return (colect);
+	if (var.colect == 0 || var.player != 1 || var.e != 1)
+		ft_exit(game, "not ", 1);
+	return (var.colect);
 }
 
 char	*ft_get_map(char *f_name, int *colect, t_main *info)
@@ -61,7 +61,7 @@ char	*ft_get_map(char *f_name, int *colect, t_main *info)
 	}
 	else
 		ft_exit(info, ERR_CANT_OPEN, 1);
-	*colect = ft_valid_map(data.new);
+	*colect = ft_valid_map(info, data.new);
 	if (*colect > 0 && data.new)
 		return (data.new);
 	return (data.new = ft_safe_free(data.new), NULL);
@@ -82,7 +82,7 @@ int	ft_look_side(t_main *game, int *size_x, int *size_y)
 		== ft_strlen(game->m_p->map_p[i + 1]))
 			i++;
 		else
-			return (0);
+			ft_exit(game, "map is not valid", 1);
 		(*size_y)++;
 	}
 	return (ft_valid_all_side(game));

@@ -6,7 +6,7 @@
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 18:19:42 by anboisve          #+#    #+#             */
-/*   Updated: 2023/01/29 16:54:46 by anboisve         ###   ########.fr       */
+/*   Updated: 2023/01/29 17:52:57 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,15 @@ typedef struct s_get_map
 	int		fd;
 }	t_get_map;
 
+typedef struct s_valid_map
+{
+	int		player;
+	int		colect;
+	int		e;
+	size_t	i;
+	char	invalid[1];
+}	t_valid_map;
+
 typedef struct s_main
 {
 	void		*mlx;
@@ -97,9 +106,9 @@ typedef struct s_main
 // pre-game
 void	ft_look_name(char *file);
 int		ft_playable(t_main *info);
-int		ft_valid_map(char *map_s);
 void	set_plaer_cord(t_main *game);
 int		ft_valid_all_side(t_main *game);
+int		ft_valid_map(t_main *game, char *map_s);
 void	ft_make_image(t_map *map, t_main *game);
 char	*ft_get_map(char *f_name, int *colect, t_main *info);
 int		ft_look_side(t_main *game, int *size_x, int *size_y);
