@@ -6,7 +6,7 @@
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:09:35 by anboisve          #+#    #+#             */
-/*   Updated: 2023/01/29 11:34:29 by anboisve         ###   ########.fr       */
+/*   Updated: 2023/01/29 16:33:31 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ char	*ft_get_map(char *f_name, int *colect, t_main *info)
 		close(data.fd);
 	}
 	else
-		ft_exit(info, "can't open map", 1);
+		ft_exit(info, ERR_CANT_OPEN, 1);
 	*colect = ft_valid_map(data.new);
-	if (*colect > 0)
+	if (*colect > 0 && data.new)
 		return (data.new);
 	return (data.new = ft_safe_free(data.new), NULL);
 }
@@ -106,7 +106,7 @@ int	ft_valid_all_side(t_main *game)
 	}
 	if (x > 51 || y > 26)
 	{
-		ft_exit(game, "map is too big, need to be smaller that x 51 y 26", 1);
+		ft_exit(game, ERR_BIG_MAP, 1);
 	}
 	y--;
 	while (--x)

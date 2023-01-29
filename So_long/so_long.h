@@ -6,7 +6,7 @@
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 18:19:42 by anboisve          #+#    #+#             */
-/*   Updated: 2023/01/29 14:16:35 by anboisve         ###   ########.fr       */
+/*   Updated: 2023/01/29 16:54:46 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # define D_MAP "maps/map.ber"
 
 # ifndef NAME
-#  define NAME "anboisve"
+#  define NAME "NO NAME"
 # endif
 
 //		art		//
@@ -111,6 +111,7 @@ void	move_player(t_main *game, int new_x, int new_y);
 void	ft_put_tile(t_main *info, int x, int y, void *img);
 int		ft_exit(t_main *game, const char *message, int error);
 
+// other 
 void	ft_free_all(t_main *info);
 void	ft_free_image(t_main *info);
 int		new_trgb(int t, int r, int g, int b);

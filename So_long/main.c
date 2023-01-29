@@ -6,7 +6,7 @@
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 09:23:33 by anboisve          #+#    #+#             */
-/*   Updated: 2023/01/29 13:54:50 by anboisve         ###   ########.fr       */
+/*   Updated: 2023/01/29 16:43:33 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void	ft_null(t_main *game)
 {
 	int	i;
 
+	game->move = 0;
+	game->frame = 0;
 	game->s = NULL;
 	game->mlx = NULL;
 	game->win_p = NULL;
@@ -81,15 +83,17 @@ int	player_input(int key, t_main *game)
 void	ft_start_game(int ac, char **av, t_main *info)
 {
 	ft_null(info);
-	if (ac != 2)
+	if (ac == 1)
 		info->m_p->valid_map = ft_get_map(D_MAP, &info->m_p->collect, info);
-	else
+	else if (ac == 2)
 		info->m_p->valid_map = ft_get_map(av[1], &info->m_p->collect, info);
+	else
+		ft_exit(info, ERR_ARGS, 1);
 	if (!info->m_p->valid_map)
-		ft_exit(info, ERR_MALLOC "ft_get_map", 0);
+		ft_exit(info, ERR_MALLOC "ft_get_map", 1);
 	info->m_p->map_p = ft_split(info->m_p->valid_map, '\n');
 	if (!info->m_p->map_p)
-		ft_exit(info, ERR_MALLOC "ft_split", 0);
+		ft_exit(info, ERR_MALLOC "ft_split", 1);
 	if (info->m_p->valid_map)
 		info->m_p->valid_map = ft_safe_free(info->m_p->valid_map);
 	if (!ft_look_side(info, &info->m_p->m_x, &info->m_p->m_y))
@@ -102,15 +106,17 @@ int	main(int ac, char **av)
 	t_map		map;
 
 	game.m_p = &map;
-	game.move = 0;
-	game.frame = 0;
 	ft_start_game(ac, av, &game);
 	set_plaer_cord(&game);
 	ft_playable(&game);
 	game.mlx = mlx_init();
+	if (!game.mlx)
+		ft_exit(&game, ERR_MLX, 1);
 	ft_make_image(&map, &game);
 	game.win_p = mlx_new_window(game.mlx, map.m_x * PIC_S, \
 	map.m_y * PIC_S, "so_long");
+	if (!game.win_p)
+		ft_exit(&game, ERR_MLX_WIN, 1);
 	mlx_loop_hook(game.mlx, print_map, &game);
 	mlx_hook(game.win_p, 02, 0L, player_input, &game);
 	mlx_hook(game.win_p, 17, 0, ft_exit, &game);

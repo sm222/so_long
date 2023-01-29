@@ -41,7 +41,6 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	@ $(MAKE) -C $(LDIR)
 	@ $(CC) $(CFLAGS) $(SRCS) -lmlx -framework OpenGL -framework AppKit $(LDIR)$(LIBFT) -o $(NAME) -D NAME=\"$(USER)\"
-
 # Removes objects
 clean:
 	$(RM) $(OBJS)
@@ -58,6 +57,6 @@ run: re all
 	@ ./so_long
 
 mem: all
-	leaks -atExit -- ./so_long
+	leaks -atExit -- ./so_long maps/map.ber
 # Removes objects and executables and remakes
 re: fclean all
