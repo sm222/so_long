@@ -6,7 +6,7 @@
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 09:44:17 by anboisve          #+#    #+#             */
-/*   Updated: 2023/01/29 10:59:55 by anboisve         ###   ########.fr       */
+/*   Updated: 2023/01/30 09:37:14 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ void	fill(t_map *map, int x, int y, int *find)
 	if (map->map_p[y] && (x > 0 && x < map->m_x) && (y > 0 && y < map->m_y))
 	{
 		if (map->map_p[y][x] == '2' || map->map_p[y][x] == '1'
-		|| map->map_p[y][x] == '3' || map->map_p[y][x] == 'e')
+		|| map->map_p[y][x] == 'c' || map->map_p[y][x] == 'e')
 			return ;
 		if (map->map_p[y][x] == 'C')
 		{
 			(*find)++;
-			map->map_p[y][x] = '3';
+			map->map_p[y][x] = 'c';
 		}
 		else if (map->map_p[y][x] == '0')
 			map->map_p[y][x] = '2';

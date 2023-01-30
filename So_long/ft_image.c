@@ -6,7 +6,7 @@
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 17:43:47 by anboisve          #+#    #+#             */
-/*   Updated: 2023/01/29 13:05:45 by anboisve         ###   ########.fr       */
+/*   Updated: 2023/01/30 09:58:31 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	print_other(t_main *info)
 		x = 0;
 		while (info->m_p->map_p[y][x])
 		{
-			if (info->m_p->map_p[y][x] == '3')
+			if (info->m_p->map_p[y][x] == 'c')
 				ft_put_tile(info, x, y, info->m_p->img_col[info->frame / 10]);
 			else if (info->m_p->map_p[y][x] == 'e')
 				ft_put_tile(info, x, y, info->m_p->img_exit);

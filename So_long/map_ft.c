@@ -6,7 +6,7 @@
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:09:35 by anboisve          #+#    #+#             */
-/*   Updated: 2023/01/29 17:59:22 by anboisve         ###   ########.fr       */
+/*   Updated: 2023/01/30 09:13:02 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ int	ft_valid_map(t_main *game, char *map_s)
 	{
 		if (map_s[var.i] == 'C')
 			var.colect++;
-		if (map_s[var.i] == 'P')
+		else if (map_s[var.i] == 'P')
 			var.player++;
-		if (map_s[var.i] == 'E')
+		else if (map_s[var.i] == 'E')
 			var.e++;
-		if (map_s[var.i] != '1' && map_s[var.i] \
+		else if (map_s[var.i] != '1' && map_s[var.i] \
 		!= '0' && map_s[var.i] != '\n')
 		{
 			var.invalid[0] = map_s[var.i];
