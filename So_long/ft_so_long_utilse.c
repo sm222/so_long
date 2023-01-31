@@ -6,7 +6,7 @@
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 14:17:16 by anboisve          #+#    #+#             */
-/*   Updated: 2023/01/30 11:08:44 by anboisve         ###   ########.fr       */
+/*   Updated: 2023/01/31 13:31:43 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	ft_free_all(t_main *info)
 		ft_ft_double_sfree((void **)info->m_p->map_p);
 	ft_safe_free(info->m_p->valid_map);
 	ft_safe_free(info->m_p->tmp);
+	ft_safe_free(info->err_msg);
 	ft_safe_free(info->m_p->s);
 	ft_safe_free(info->s);
 	ft_free_image(info);

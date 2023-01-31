@@ -6,7 +6,7 @@
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 11:07:18 by anboisve          #+#    #+#             */
-/*   Updated: 2023/01/30 17:19:58 by anboisve         ###   ########.fr       */
+/*   Updated: 2023/01/31 17:57:20 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@
 # include <stdlib.h>
 # include <limits.h>
 # include "index.h"
+# include <stdarg.h>
+# include "ft_printf.h"
+
+# define HEX_TABLE "0123456789abcdef"
 
 //made by @sm222
 //char		\verification
@@ -53,6 +57,7 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char *));
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 char	**ft_cpy_double_char(char **str);
+char	*ft_combine(char *s, ...);
 
 //memory										\manipulation
 

@@ -1,35 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   ft_put_hex.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/10 10:10:53 by anboisve          #+#    #+#             */
-/*   Updated: 2023/01/31 17:51:15 by anboisve         ###   ########.fr       */
+/*   Created: 2022/11/08 16:51:22 by anboisve          #+#    #+#             */
+/*   Updated: 2022/11/11 08:41:20 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "error.h"
+#include "ft_printf.h"
 
-void	ft_error(const char *message, int error)
+int	ft_put_hex(unsigned int nb, char maj)
 {
-	if (error)
-		printf("Error!\n");
-	ft_printf("%s\n", message);
-	exit(0);
-}
+	int		size;
+	char	*tmp;
 
-int	ft_exit(t_main *game, const char *message, int error)
-{
-	if (game->mlx)
-		mlx_destroy_window(game->mlx, game->win_p);
-	ft_free_all(game);
-	ft_error(message, error);
-	return (0);
-}
-
-int	ft_escape(t_main *game)
-{
-	return (ft_exit(game, "Goodbye!", 0));
+	tmp = ft_ulltoa(nb, 16);
+	size = ft_strlen(tmp) + 1;
+	if (maj == 'X')
+		while (size--)
+			tmp[size] = ft_toupper(tmp[size]);
+	size = ft_putstr_fd(tmp, STDOUT_FILENO);
+	ft_safe_free(tmp);
+	return (size);
 }

@@ -1,35 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   ft_put_p.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/10 10:10:53 by anboisve          #+#    #+#             */
-/*   Updated: 2023/01/31 17:51:15 by anboisve         ###   ########.fr       */
+/*   Created: 2022/11/07 14:09:21 by anboisve          #+#    #+#             */
+/*   Updated: 2022/11/10 17:17:39 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "error.h"
+#include "ft_printf.h"
 
-void	ft_error(const char *message, int error)
+int	ft_put_p(uintptr_t p)
 {
-	if (error)
-		printf("Error!\n");
-	ft_printf("%s\n", message);
-	exit(0);
-}
+	char	*tmp;
+	int		size;
 
-int	ft_exit(t_main *game, const char *message, int error)
-{
-	if (game->mlx)
-		mlx_destroy_window(game->mlx, game->win_p);
-	ft_free_all(game);
-	ft_error(message, error);
-	return (0);
-}
-
-int	ft_escape(t_main *game)
-{
-	return (ft_exit(game, "Goodbye!", 0));
+	size = ft_putstr_fd("0x", STDOUT_FILENO);
+	tmp = ft_ulltoa((unsigned long)p, 16);
+	size += ft_putstr_fd(tmp, STDOUT_FILENO);
+	if (tmp)
+		ft_safe_free(tmp);
+	return (size);
 }

@@ -6,7 +6,7 @@
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 09:23:33 by anboisve          #+#    #+#             */
-/*   Updated: 2023/01/30 13:06:13 by anboisve         ###   ########.fr       */
+/*   Updated: 2023/01/31 17:40:35 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	ft_null(t_main *game)
 	game->mlx = NULL;
 	game->win_p = NULL;
 	game->m_p->s = NULL;
+	game->err_msg = NULL;
 	game->m_p->tmp = NULL;
 	game->img_player = NULL;
 	game->img_player = NULL;
@@ -64,7 +65,7 @@ void	ft_null(t_main *game)
 int	player_input(int key, t_main *game)
 {
 	if (key == 53)
-		ft_exit(game, "goodbye!", 0);
+		ft_exit(game, "Goodbye!", 0);
 	if (key == 13 || key == 126)
 		move_player(game, 0, -1);
 	if (key == 1 || key == 125)
@@ -118,7 +119,7 @@ int	main(int ac, char **av)
 		ft_exit(&game, ERR_MLX_WIN, 1);
 	mlx_loop_hook(game.mlx, print_map, &game);
 	mlx_hook(game.win_p, 02, 0L, player_input, &game);
-	mlx_hook(game.win_p, 17, 0, ft_exit, &game);
+	mlx_hook(game.win_p, 17, 0, ft_escape, &game);
 	mlx_loop(game.mlx);
 	return (0);
 }

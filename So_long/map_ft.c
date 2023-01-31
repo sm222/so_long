@@ -6,7 +6,7 @@
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:09:35 by anboisve          #+#    #+#             */
-/*   Updated: 2023/01/31 10:42:37 by anboisve         ###   ########.fr       */
+/*   Updated: 2023/01/31 13:23:25 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	ft_valid_map(t_main *game, char *map_s)
 		!= '0' && map_s[var.i] != '\n')
 		{
 			var.invalid[0] = map_s[var.i];
-			ft_exit(game, "is a invalid caracter", 1);
+			ft_exit(game, ERR_NOT_VALID_CHAR, 1);
 		}
 	}
 	if (var.colect == 0 || var.player != 1 || var.e != 1)

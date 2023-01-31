@@ -45,7 +45,13 @@ SRCS	=	ft_atoi.c\
 			ft_realloc.c\
 			ft_cpy_double_char.c\
 			get_next_line.c\
-			get_next_line_utils.c
+			get_next_line_utils.c\
+			ft_combine.c\
+			ft_printf.c\
+			ft_put_hex.c\
+			ft_put_p.c\
+			ft_put_u.c\
+			ft_ulltoa.c
 
 OBJS	=	$(SRCS:.c=.o)
 # BSources are all .c files

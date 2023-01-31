@@ -6,7 +6,7 @@
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 09:44:17 by anboisve          #+#    #+#             */
-/*   Updated: 2023/01/31 09:15:26 by anboisve         ###   ########.fr       */
+/*   Updated: 2023/01/31 13:41:08 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,6 @@ int	ft_playable(t_main *info)
 	fill(&data, info->player_x / PIC_S, info->player_y / PIC_S);
 	ft_ft_double_sfree((void **)data.map);
 	if (data.find != info->m_p->collect || data.exit == 0)
-	{
-		ft_exit(info, "not playable ici", 1);
-	}
+		ft_exit(info, "not playable", 1);
 	return (0);
 }

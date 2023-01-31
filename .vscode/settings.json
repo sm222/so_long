@@ -11,6 +11,9 @@
 		"err.h": "c",
 		"memory.h": "c",
 		"unistd.h": "c",
-		"stdio.h": "c"
+		"stdio.h": "c",
+		"error.h": "c",
+		"ft_printf.h": "c",
+		"libft.h": "c"
 	}
 }

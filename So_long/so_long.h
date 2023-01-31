@@ -6,7 +6,7 @@
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 18:19:42 by anboisve          #+#    #+#             */
-/*   Updated: 2023/01/30 17:51:54 by anboisve         ###   ########.fr       */
+/*   Updated: 2023/01/31 13:29:26 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ typedef struct s_main
 	size_t		move;
 	int			frame;
 	char		*s;
+	char		*err_msg;
 	t_map		*m_p;
 }	t_main;
 
@@ -131,6 +132,7 @@ int		ft_exit(t_main *game, const char *message, int error);
 void	ft_free_all(t_main *info);
 void	ft_free_image(t_main *info);
 int		new_trgb(int t, int r, int g, int b);
+int		ft_escape(t_main *game);
 
 //export MallocStackLogging=0
 #endif

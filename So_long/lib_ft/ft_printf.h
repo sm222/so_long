@@ -1,35 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/10 10:10:53 by anboisve          #+#    #+#             */
-/*   Updated: 2023/01/31 17:51:15 by anboisve         ###   ########.fr       */
+/*   Created: 2022/11/06 13:13:03 by anboisve          #+#    #+#             */
+/*   Updated: 2023/01/31 17:46:43 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "error.h"
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
-void	ft_error(const char *message, int error)
-{
-	if (error)
-		printf("Error!\n");
-	ft_printf("%s\n", message);
-	exit(0);
-}
+# include "libft.h"
 
-int	ft_exit(t_main *game, const char *message, int error)
-{
-	if (game->mlx)
-		mlx_destroy_window(game->mlx, game->win_p);
-	ft_free_all(game);
-	ft_error(message, error);
-	return (0);
-}
+int		ft_printf(const char *str, ...);
+int		ft_put_p(uintptr_t nbr);
+char	*ft_ulltoa(unsigned long long nb, int base);
+int		ft_put_hex(unsigned int val, char maj);
+int		ft_put_u(unsigned int nb);
 
-int	ft_escape(t_main *game)
-{
-	return (ft_exit(game, "Goodbye!", 0));
-}
+#endif
