@@ -6,7 +6,7 @@
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:09:35 by anboisve          #+#    #+#             */
-/*   Updated: 2023/01/30 09:13:02 by anboisve         ###   ########.fr       */
+/*   Updated: 2023/01/31 10:42:37 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,7 @@ char	*ft_get_map(char *f_name, int *colect, t_main *info)
 		{
 			data.tmp = get_next_line(data.fd);
 			data.new = ft_strfjoin(data.new, data.tmp);
-			if (data.tmp)
-				ft_safe_free(data.tmp);
+			ft_safe_free(data.tmp);
 		}
 		close(data.fd);
 	}
@@ -82,7 +81,7 @@ int	ft_look_side(t_main *game, int *size_x, int *size_y)
 		== ft_strlen(game->m_p->map_p[i + 1]))
 			i++;
 		else
-			ft_exit(game, "map is not valid", 1);
+			ft_exit(game, ERR_MAP_SIZE, 1);
 		(*size_y)++;
 	}
 	return (ft_valid_all_side(game));
@@ -97,20 +96,18 @@ int	ft_valid_all_side(t_main *game)
 	y = 1;
 	while (game->m_p->map_p[0][x])
 		if (game->m_p->map_p[0][x++] != '1')
-			return (0);
+			ft_exit(game, "invalid top", 1);
 	while (game->m_p->map_p[y])
 	{
 		if (game->m_p->map_p[y][0] != '1' || game->m_p->map_p[y][x - 1] != '1')
-			return (0);
+			ft_exit(game, "invalid side", 1);
 		y++;
 	}
 	if (x > 51 || y > 26)
-	{
 		ft_exit(game, ERR_BIG_MAP, 1);
-	}
 	y--;
 	while (--x)
 		if (game->m_p->map_p[y][x] != '1')
-			return (0);
-	return (1);
+			ft_exit(game, "invalid bot", 1);
+	return (0);
 }

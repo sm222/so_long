@@ -1,30 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   ft_cpy_double_char.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/10 10:10:53 by anboisve          #+#    #+#             */
-/*   Updated: 2023/01/31 10:13:01 by anboisve         ###   ########.fr       */
+/*   Created: 2023/01/30 13:53:12 by anboisve          #+#    #+#             */
+/*   Updated: 2023/01/30 17:31:50 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "error.h"
+#include "libft.h"
 
-void	ft_error(const char *message, int error)
+char	**ft_cpy_double_char(char **str)
 {
-	if (error)
-		printf("Error!\n");
-	printf("%s\n", message);
-	exit(0);
-}
+	int		i;
+	int		j;
+	char	**new;
 
-int	ft_exit(t_main *game, const char *message, int error)
-{
-	if (game->mlx)
-		mlx_destroy_window(game->mlx, game->win_p);
-	ft_free_all(game);
-	ft_error(message, error);
-	return (0);
+	i = 0;
+	j = 0;
+	new = NULL;
+	if (!str)
+		return (NULL);
+	while (str[i])
+		i++;
+	new = ft_calloc(i + 1, sizeof(char *));
+	while (j < i)
+	{
+		new[j] = ft_strdup(str[j]);
+		j++;
+	}
+	return (new);
 }

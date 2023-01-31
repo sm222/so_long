@@ -6,49 +6,50 @@
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 09:44:17 by anboisve          #+#    #+#             */
-/*   Updated: 2023/01/30 09:37:14 by anboisve         ###   ########.fr       */
+/*   Updated: 2023/01/31 09:15:26 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	fill(t_map *map, int x, int y, int *find)
+void	fill(t_flood *data, int x, int y)
 {
-	if (map->map_p[y] && (x > 0 && x < map->m_x) && (y > 0 && y < map->m_y))
+	if (data->map[y][x] == '2' || data->map[y][x] == '1'
+	|| data->map[y][x] == 'c' || data->map[y][x] == 'e')
+		return ;
+	if (data->map[y][x] == 'C')
 	{
-		if (map->map_p[y][x] == '2' || map->map_p[y][x] == '1'
-		|| map->map_p[y][x] == 'c' || map->map_p[y][x] == 'e')
-			return ;
-		if (map->map_p[y][x] == 'C')
-		{
-			(*find)++;
-			map->map_p[y][x] = 'c';
-		}
-		else if (map->map_p[y][x] == '0')
-			map->map_p[y][x] = '2';
-		else if (map->map_p[y][x] == 'E')
-		{
-			map->map_p[y][x] = 'e';
-			map->exit_swich = 1;
-		}
-		fill(map, x, y + 1, find);
-		fill(map, x, y - 1, find);
-		fill(map, x + 1, y, find);
-		fill(map, x - 1, y, find);
+		data->find++;
+		data->map[y][x] = 'c';
 	}
+	else if (data->map[y][x] == '0')
+		data->map[y][x] = '2';
+	else if (data->map[y][x] == 'E')
+	{
+		data->map[y][x] = 'e';
+		data->exit = 1;
+	}
+	fill(data, x, y + 1);
+	fill(data, x, y - 1);
+	fill(data, x + 1, y);
+	fill(data, x - 1, y);
 }
 
 int	ft_playable(t_main *info)
 {
-	int	find;
+	t_flood	data;
 
+	data.exit = 0;
+	data.find = 0;
 	info->m_p->exit_swich = 0;
-	find = 0;
-	fill(info->m_p, info->player_x / PIC_S, info->player_y / PIC_S, &find);
-	if (find != info->m_p->collect || info->m_p->exit_swich == 0)
+	data.map = ft_cpy_double_char(info->m_p->map_p);
+	if (!data.map)
+		ft_exit(info, ERR_MALLOC "ft_playable", 1);
+	fill(&data, info->player_x / PIC_S, info->player_y / PIC_S);
+	ft_ft_double_sfree((void **)data.map);
+	if (data.find != info->m_p->collect || data.exit == 0)
 	{
-		ft_ft_double_sfree((void *)info->m_p->map_p);
-		ft_exit(info, "not playable", 1);
+		ft_exit(info, "not playable ici", 1);
 	}
 	return (0);
 }

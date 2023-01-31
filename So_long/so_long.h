@@ -6,7 +6,7 @@
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 18:19:42 by anboisve          #+#    #+#             */
-/*   Updated: 2023/01/29 17:52:57 by anboisve         ###   ########.fr       */
+/*   Updated: 2023/01/30 17:51:54 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,13 @@ typedef struct s_valid_map
 	size_t	i;
 	char	invalid[1];
 }	t_valid_map;
+
+typedef struct s_flood
+{
+	int		find;
+	int		exit;
+	char	**map;
+}	t_flood;
 
 typedef struct s_main
 {

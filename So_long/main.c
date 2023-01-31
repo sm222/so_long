@@ -6,7 +6,7 @@
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 09:23:33 by anboisve          #+#    #+#             */
-/*   Updated: 2023/01/30 12:32:58 by anboisve         ###   ########.fr       */
+/*   Updated: 2023/01/30 13:06:13 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,7 @@ void	ft_start_game(int ac, char **av, t_main *info)
 		ft_exit(info, ERR_MALLOC "ft_split", 1);
 	if (info->m_p->valid_map)
 		info->m_p->valid_map = ft_safe_free(info->m_p->valid_map);
-	if (!ft_look_side(info, &info->m_p->m_x, &info->m_p->m_y))
-		ft_exit(info, "invalid map", 1);
+	ft_look_side(info, &info->m_p->m_x, &info->m_p->m_y);
 }
 
 int	main(int ac, char **av)
