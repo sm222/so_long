@@ -6,7 +6,7 @@
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 14:17:16 by anboisve          #+#    #+#             */
-/*   Updated: 2023/01/31 13:31:43 by anboisve         ###   ########.fr       */
+/*   Updated: 2023/02/01 17:58:14 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	ft_free_image(t_main *info)
 {
 	int	i;
 
-	if (info->img_player)
-		mlx_destroy_image(info->mlx, info->img_player);
+	if (info->img_player[0])
+		mlx_destroy_image(info->mlx, info->img_player[0]);
 	if (info->m_p->img_exit)
 		mlx_destroy_image(info->mlx, info->m_p->img_exit);
 	if (info->m_p->img_flore)

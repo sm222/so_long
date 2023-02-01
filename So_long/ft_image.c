@@ -6,18 +6,23 @@
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 17:43:47 by anboisve          #+#    #+#             */
-/*   Updated: 2023/01/31 09:06:57 by anboisve         ###   ########.fr       */
+/*   Updated: 2023/02/01 17:59:20 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+/*
+	add at the image to the structs
+*/
 
 void	ft_make_image(t_map *map, t_main *game)
 {
 	int		x;
 	int		y;
 
-	game->img_player = mlx_xpm_file_to_image(game->mlx, IMAGE_PLAYER, &x, &y);
+	game->img_player[0] = mlx_xpm_file_to_image(game->mlx, IMAGE_PLY, &x, &y);
+	game->img_player[1] = mlx_xpm_file_to_image(game->mlx, IMAGE_PLY, &x, &y);
 	map->img_flore = mlx_xpm_file_to_image(game->mlx, IMAGE_FLORE, &x, &y);
 	map->img_wall[0] = mlx_xpm_file_to_image(game->mlx, IMAGE_WALL, &x, &y);
 	map->img_wall[1] = mlx_xpm_file_to_image(game->mlx, IMAGE_WALL1, &x, &y);
@@ -37,13 +42,12 @@ void	put_text_window(t_main *info)
 	int		color;
 
 	color = new_trgb(255, NAME[1] * 2, NAME[2] * 2, NAME[0] * 2);
-	info->s = ft_itoa(info->move);
-	new = ft_strjoin("move ", info->s);
+	new = ft_combine("move = %S", ft_itoa(info->move));
 	mlx_string_put(info->mlx, info->win_p, info->player_x - 15,
 		info->player_y - 20, color, NAME);
-	color = new_trgb(255, 0, 0, 255);
-	mlx_string_put(info->mlx, info->win_p, info->m_p->m_x * PIC_S / 2 - 30,
-		10, color, new);
+	color = new_trgb(255, 0, 255, 200);
+	mlx_string_put(info->mlx, info->win_p, info->m_p->m_x * PIC_S \
+	/ 2 - 30, 10, color, new);
 	if (info->s)
 		info->s = ft_safe_free(info->s);
 	if (new)
@@ -71,7 +75,7 @@ void	print_other(t_main *info)
 		}
 		y++;
 	}
-	mlx_put_image_to_window(info->mlx, info->win_p, info->img_player,
+	mlx_put_image_to_window(info->mlx, info->win_p, info->img_player[0],
 		info->player_x, info->player_y);
 	put_text_window(info);
 	info->frame += 5;

@@ -6,7 +6,7 @@
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 09:23:33 by anboisve          #+#    #+#             */
-/*   Updated: 2023/01/31 17:40:35 by anboisve         ###   ########.fr       */
+/*   Updated: 2023/02/01 17:57:55 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ void	ft_null(t_main *game)
 	game->m_p->s = NULL;
 	game->err_msg = NULL;
 	game->m_p->tmp = NULL;
-	game->img_player = NULL;
-	game->img_player = NULL;
+	game->img_player[0] = NULL;
+	game->img_player[1] = NULL;
 	game->m_p->map_p = NULL;
 	game->m_p->img_exit = NULL;
 	game->m_p->valid_map = NULL;

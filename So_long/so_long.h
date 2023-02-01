@@ -6,7 +6,7 @@
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 18:19:42 by anboisve          #+#    #+#             */
-/*   Updated: 2023/01/31 13:29:26 by anboisve         ###   ########.fr       */
+/*   Updated: 2023/02/01 17:57:26 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@
 # define IMAGE_WALL2 "image/wall3.xpm"
 
 //	player	//
-# define IMAGE_PLAYER "image/player.xpm"
+# define IMAGE_PLY "image/player.xpm"
+# define IMAGE_PLY "image/player.xpm"
 
 //	other	//
 # define IMAGE_FLORE "image/flore.xpm"
@@ -99,7 +100,7 @@ typedef struct s_main
 {
 	void		*mlx;
 	void		*win_p;
-	void		*img_player;
+	void		*img_player[2];
 	int			player_x;
 	int			player_y;
 	size_t		move;
