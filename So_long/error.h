@@ -6,7 +6,7 @@
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:49:27 by anboisve          #+#    #+#             */
-/*   Updated: 2023/02/01 09:08:47 by anboisve         ###   ########.fr       */
+/*   Updated: 2023/02/06 15:13:16 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,11 @@
 # define ERR_BIG_MAP "map is too big, need to be smaller that x 51 y 26"
 # define ERR_MAP_SIZE "invalid map, wall is not the same size"
 # define ERR_NOT_VALID_CHAR "is a invalid caracter"
+# define ERR_VA_MAP "is need to have one P, one E and minimum one C"
 # define GG " you won!!!"
 
 //			ft			//
 
-void	ft_error(const char *message, int error);
+void	ft_error(char *f_message, int error);
 
 #endif // ERROR_H

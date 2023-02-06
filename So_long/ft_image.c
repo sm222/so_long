@@ -6,7 +6,7 @@
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 17:43:47 by anboisve          #+#    #+#             */
-/*   Updated: 2023/02/01 17:59:20 by anboisve         ###   ########.fr       */
+/*   Updated: 2023/02/06 16:14:57 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_make_image(t_map *map, t_main *game)
 	int		y;
 
 	game->img_player[0] = mlx_xpm_file_to_image(game->mlx, IMAGE_PLY, &x, &y);
-	game->img_player[1] = mlx_xpm_file_to_image(game->mlx, IMAGE_PLY, &x, &y);
+	game->img_player[1] = mlx_xpm_file_to_image(game->mlx, IMAGE_PLY2, &x, &y);
 	map->img_flore = mlx_xpm_file_to_image(game->mlx, IMAGE_FLORE, &x, &y);
 	map->img_wall[0] = mlx_xpm_file_to_image(game->mlx, IMAGE_WALL, &x, &y);
 	map->img_wall[1] = mlx_xpm_file_to_image(game->mlx, IMAGE_WALL1, &x, &y);
@@ -75,10 +75,10 @@ void	print_other(t_main *info)
 		}
 		y++;
 	}
-	mlx_put_image_to_window(info->mlx, info->win_p, info->img_player[0],
-		info->player_x, info->player_y);
+	mlx_put_image_to_window(info->mlx, info->win_p, \
+	info->img_player[info->p_dir], info->player_x, info->player_y);
 	put_text_window(info);
-	info->frame += 5;
+	info->frame += 11;
 }
 
 int	print_map(t_main *info)

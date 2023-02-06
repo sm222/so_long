@@ -6,7 +6,7 @@
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 18:19:42 by anboisve          #+#    #+#             */
-/*   Updated: 2023/02/01 17:57:26 by anboisve         ###   ########.fr       */
+/*   Updated: 2023/02/06 16:19:48 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@
 
 //	player	//
 # define IMAGE_PLY "image/player.xpm"
-# define IMAGE_PLY "image/player.xpm"
+# define IMAGE_PLY2 "image/player2.xpm"
 
 //	other	//
 # define IMAGE_FLORE "image/flore.xpm"
@@ -101,6 +101,7 @@ typedef struct s_main
 	void		*mlx;
 	void		*win_p;
 	void		*img_player[2];
+	int			p_dir;
 	int			player_x;
 	int			player_y;
 	size_t		move;
@@ -119,6 +120,8 @@ void	set_plaer_cord(t_main *game);
 int		ft_valid_all_side(t_main *game);
 int		ft_valid_map(t_main *game, char *map_s);
 void	ft_make_image(t_map *map, t_main *game);
+void	ft_setup(t_main *info, int ac, char **av);
+void	ft_start_game(int ac, char **av, t_main *info);
 char	*ft_get_map(char *f_name, int *colect, t_main *info);
 int		ft_look_side(t_main *game, int *size_x, int *size_y);
 
@@ -126,14 +129,14 @@ int		ft_look_side(t_main *game, int *size_x, int *size_y);
 int		print_map(t_main *info);
 void	ft_clean_map(t_map *map);
 void	move_player(t_main *game, int new_x, int new_y);
+int		ft_exit(t_main *game, char *f_message, int error);
 void	ft_put_tile(t_main *info, int x, int y, void *img);
-int		ft_exit(t_main *game, const char *message, int error);
 
 // other 
+int		ft_escape(t_main *game);
 void	ft_free_all(t_main *info);
 void	ft_free_image(t_main *info);
 int		new_trgb(int t, int r, int g, int b);
-int		ft_escape(t_main *game);
 
 //export MallocStackLogging=0
 #endif

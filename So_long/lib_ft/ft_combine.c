@@ -6,7 +6,7 @@
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 15:44:12 by anboisve          #+#    #+#             */
-/*   Updated: 2023/02/01 16:52:22 by anboisve         ###   ########.fr       */
+/*   Updated: 2023/02/06 09:35:04 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ static char	*ft_add_arg(va_list list, char type)
 		return (ft_itoa(va_arg(list, int)));
 	else if (type == 'u')
 		return (ft_ulltoa(va_arg(list, unsigned int), 10));
-	else if (type == 'q')
-		return (ft_ulltoa(va_arg(list, unsigned int), 4));
 	else if (type == 'x')
 		return (ft_ulltoa(va_arg(list, unsigned long), 16));
 	else if (type == '%')
@@ -61,7 +59,6 @@ static char	*ft_add_str(va_list list, char type, char *s)
 		S = str but will free it for you
 		d || i for int
 		x = hexadecimal
-		b = binary 
 		%% = add one %
 */
 char	*ft_combine(char *s, ...)

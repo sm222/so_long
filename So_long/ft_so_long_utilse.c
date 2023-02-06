@@ -6,11 +6,18 @@
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 14:17:16 by anboisve          #+#    #+#             */
-/*   Updated: 2023/02/01 17:58:14 by anboisve         ###   ########.fr       */
+/*   Updated: 2023/02/06 13:31:58 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	ft_setup(t_main *info, int ac, char **av)
+{
+	ft_start_game(ac, av, info);
+	set_plaer_cord(info);
+	ft_playable(info);
+}
 
 void	ft_free_image(t_main *info)
 {
@@ -18,6 +25,8 @@ void	ft_free_image(t_main *info)
 
 	if (info->img_player[0])
 		mlx_destroy_image(info->mlx, info->img_player[0]);
+	if (info->img_player[1])
+		mlx_destroy_image(info->mlx, info->img_player[1]);
 	if (info->m_p->img_exit)
 		mlx_destroy_image(info->mlx, info->m_p->img_exit);
 	if (info->m_p->img_flore)
@@ -38,7 +47,6 @@ void	ft_free_all(t_main *info)
 		ft_ft_double_sfree((void **)info->m_p->map_p);
 	ft_safe_free(info->m_p->valid_map);
 	ft_safe_free(info->m_p->tmp);
-	ft_safe_free(info->err_msg);
 	ft_safe_free(info->m_p->s);
 	ft_safe_free(info->s);
 	ft_free_image(info);

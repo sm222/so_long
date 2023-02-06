@@ -6,7 +6,7 @@
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 09:23:33 by anboisve          #+#    #+#             */
-/*   Updated: 2023/02/01 17:57:55 by anboisve         ###   ########.fr       */
+/*   Updated: 2023/02/06 16:06:01 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,15 @@
 */
 void	ft_look_name(char *file)
 {
+	char	*tmp;
 	char	*s;
 
-	s = ft_strrchr(file, '.');
-	if (!s || ft_strncmp(s, ".ber", ft_strlen(s) + 1) != 0)
-		ft_error("bad file name", 1);
+	tmp = ft_strrchr(file, '.');
+	if (!tmp || ft_strncmp(tmp, ".ber", ft_strlen(tmp) + 1) != 0)
+	{
+		s = ft_combine("bad file name");
+		ft_error(s, 1);
+	}
 }
 
 /*
@@ -35,6 +39,7 @@ void	ft_null(t_main *game)
 
 	game->move = 0;
 	game->frame = 0;
+	game->p_dir = 0;
 	game->s = NULL;
 	game->mlx = NULL;
 	game->win_p = NULL;
@@ -64,16 +69,27 @@ void	ft_null(t_main *game)
 */
 int	player_input(int key, t_main *game)
 {
+	char	*s;
+
 	if (key == 53)
-		ft_exit(game, "Goodbye!", 0);
+	{
+		s = ft_combine("Goodbye!");
+		ft_exit(game, s, 0);
+	}
 	if (key == 13 || key == 126)
 		move_player(game, 0, -1);
 	if (key == 1 || key == 125)
 		move_player(game, 0, 1);
 	if (key == 2 || key == 124)
+	{
 		move_player(game, 1, 0);
+		game->p_dir = 0;
+	}
 	if (key == 0 || key == 123)
+	{
 		move_player(game, -1, 0);
+		game->p_dir = 1;
+	}
 	return (0);
 }
 
@@ -89,12 +105,21 @@ void	ft_start_game(int ac, char **av, t_main *info)
 	else if (ac == 2)
 		info->m_p->valid_map = ft_get_map(av[1], &info->m_p->collect, info);
 	else
-		ft_exit(info, ERR_ARGS, 1);
+	{
+		info->err_msg = ft_combine(ERR_ARGS);
+		ft_exit(info, info->err_msg, 1);
+	}
 	if (!info->m_p->valid_map)
-		ft_exit(info, ERR_MALLOC "ft_get_map", 1);
+	{
+		info->err_msg = ft_combine(ERR_MALLOC"ft_get_map");
+		ft_exit(info, info->err_msg, 1);
+	}
 	info->m_p->map_p = ft_split(info->m_p->valid_map, '\n');
 	if (!info->m_p->map_p)
-		ft_exit(info, ERR_MALLOC "ft_split", 1);
+	{
+		info->err_msg = ft_combine(ERR_MALLOC "ft_split");
+		ft_exit(info, info->err_msg, 1);
+	}
 	if (info->m_p->valid_map)
 		info->m_p->valid_map = ft_safe_free(info->m_p->valid_map);
 	ft_look_side(info, &info->m_p->m_x, &info->m_p->m_y);
@@ -106,17 +131,15 @@ int	main(int ac, char **av)
 	t_map		map;
 
 	game.m_p = &map;
-	ft_start_game(ac, av, &game);
-	set_plaer_cord(&game);
-	ft_playable(&game);
+	ft_setup(&game, ac, av);
 	game.mlx = mlx_init();
 	if (!game.mlx)
-		ft_exit(&game, ERR_MLX, 1);
+		ft_exit(&game, ft_combine(ERR_MLX), 1);
 	ft_make_image(&map, &game);
 	game.win_p = mlx_new_window(game.mlx, map.m_x * PIC_S, \
 	map.m_y * PIC_S, "so_long");
 	if (!game.win_p)
-		ft_exit(&game, ERR_MLX_WIN, 1);
+		ft_exit(&game, ft_combine(ERR_MLX_WIN), 1);
 	mlx_loop_hook(game.mlx, print_map, &game);
 	mlx_hook(game.win_p, 02, 0L, player_input, &game);
 	mlx_hook(game.win_p, 17, 0, ft_escape, &game);

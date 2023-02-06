@@ -6,7 +6,7 @@
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 09:44:17 by anboisve          #+#    #+#             */
-/*   Updated: 2023/01/31 13:41:08 by anboisve         ###   ########.fr       */
+/*   Updated: 2023/02/06 13:06:01 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,16 @@ int	ft_playable(t_main *info)
 	info->m_p->exit_swich = 0;
 	data.map = ft_cpy_double_char(info->m_p->map_p);
 	if (!data.map)
-		ft_exit(info, ERR_MALLOC "ft_playable", 1);
+	{
+		info->err_msg = ft_combine(ERR_MALLOC "ft_playable");
+		ft_exit(info, info->err_msg, 1);
+	}
 	fill(&data, info->player_x / PIC_S, info->player_y / PIC_S);
 	ft_ft_double_sfree((void **)data.map);
 	if (data.find != info->m_p->collect || data.exit == 0)
-		ft_exit(info, "not playable", 1);
+	{
+		info->err_msg = ft_combine("not playable");
+		ft_exit(info, info->err_msg, 1);
+	}
 	return (0);
 }

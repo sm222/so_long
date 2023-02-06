@@ -6,7 +6,7 @@
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 11:07:18 by anboisve          #+#    #+#             */
-/*   Updated: 2023/01/31 17:57:20 by anboisve         ###   ########.fr       */
+/*   Updated: 2023/02/06 12:37:04 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	*ft_safe_free(void *p);
 void	ft_bzero(void *s, size_t n);
 void	**ft_ft_double_sfree(void	**ptr);
 void	*ft_calloc(size_t count, size_t size);
-void	*ft_realloc(void *old, size_t count, size_t size);
+void	*ft_realloc(void *old, size_t count, size_t size, size_t new_size);
 void	*ft_memset(void *b, int c, size_t len);
 void	*ft_memchr(const void *s, int c, size_t n);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
