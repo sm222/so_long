@@ -14,7 +14,7 @@ LDIR	=	lib_ft/
 
 # Compiler and flags
 CC		=	gcc
-CFLAGS	=	-Wall -Werror -Wextra -g
+CFLAGS	=	-Wall -Werror -Wextra
 RM	=	rm	-f
 
 #-fsanitize=address
@@ -53,7 +53,10 @@ fclean: clean
 	$(RM) $(LDIR)$(LIBFT)
 	@ echo $(shell clear) $(GRN) clean all$(RESET)
 
-run: re all
+run: all
+	@ ./so_long
+
+mc: all clean
 	@ ./so_long
 
 mem: all

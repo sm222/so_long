@@ -6,7 +6,7 @@
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 10:09:35 by anboisve          #+#    #+#             */
-/*   Updated: 2023/02/06 15:23:26 by anboisve         ###   ########.fr       */
+/*   Updated: 2023/02/07 10:27:35 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ char	*ft_get_map(char *f_name, int *colect, t_main *info)
 		close(data.fd);
 	}
 	else
-		ft_exit(info, ft_combine(ERR_CANT_OPEN), 1);
+		ft_exit(info, ft_combine(ERR_CANT_OPEN " %s", f_name), 1);
 	*colect = ft_valid_map(info, data.new);
 	if (*colect > 0 && data.new)
 		return (data.new);
@@ -81,7 +81,7 @@ int	ft_look_side(t_main *game, int *size_x, int *size_y)
 		== ft_strlen(game->m_p->map_p[i + 1]))
 			i++;
 		else
-			ft_exit(game, ft_combine(ERR_MAP_SIZE), 1);
+			ft_exit(game, ft_combine(ERR_MAP_SIZE "%d", i + 1), 1);
 		(*size_y)++;
 	}
 	return (ft_valid_all_side(game));
@@ -104,7 +104,7 @@ int	ft_valid_all_side(t_main *game)
 		y++;
 	}
 	if (x > 51 || y > 26)
-		ft_exit(game, ft_combine(ERR_BIG_MAP", x%d y%d", x, y), 1);
+		ft_exit(game, ft_combine(ERR_BIG_MAP", this map was x%d y%d", x, y), 1);
 	y--;
 	while (--x)
 		if (game->m_p->map_p[y][x] != '1')

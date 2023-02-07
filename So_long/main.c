@@ -6,7 +6,7 @@
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 09:23:33 by anboisve          #+#    #+#             */
-/*   Updated: 2023/02/06 16:06:01 by anboisve         ###   ########.fr       */
+/*   Updated: 2023/02/07 10:17:00 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,8 @@ void	ft_null(t_main *game)
 */
 int	player_input(int key, t_main *game)
 {
-	char	*s;
-
 	if (key == 53)
-	{
-		s = ft_combine("Goodbye!");
-		ft_exit(game, s, 0);
-	}
+		ft_exit(game, ft_combine("Goodbye!"), 0);
 	if (key == 13 || key == 126)
 		move_player(game, 0, -1);
 	if (key == 1 || key == 125)
@@ -105,21 +100,12 @@ void	ft_start_game(int ac, char **av, t_main *info)
 	else if (ac == 2)
 		info->m_p->valid_map = ft_get_map(av[1], &info->m_p->collect, info);
 	else
-	{
-		info->err_msg = ft_combine(ERR_ARGS);
-		ft_exit(info, info->err_msg, 1);
-	}
+		ft_exit(info, ft_combine(ERR_ARGS), 1);
 	if (!info->m_p->valid_map)
-	{
-		info->err_msg = ft_combine(ERR_MALLOC"ft_get_map");
-		ft_exit(info, info->err_msg, 1);
-	}
+		ft_exit(info, ft_combine(ERR_MALLOC"ft_get_map"), 1);
 	info->m_p->map_p = ft_split(info->m_p->valid_map, '\n');
 	if (!info->m_p->map_p)
-	{
-		info->err_msg = ft_combine(ERR_MALLOC "ft_split");
-		ft_exit(info, info->err_msg, 1);
-	}
+		ft_exit(info, ft_combine(ERR_MALLOC "ft_split"), 1);
 	if (info->m_p->valid_map)
 		info->m_p->valid_map = ft_safe_free(info->m_p->valid_map);
 	ft_look_side(info, &info->m_p->m_x, &info->m_p->m_y);
