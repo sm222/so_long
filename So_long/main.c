@@ -6,7 +6,7 @@
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 09:23:33 by anboisve          #+#    #+#             */
-/*   Updated: 2023/02/07 10:17:00 by anboisve         ###   ########.fr       */
+/*   Updated: 2023/02/07 11:25:53 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ void	ft_null(t_main *game)
 	game->mlx = NULL;
 	game->win_p = NULL;
 	game->m_p->s = NULL;
-	game->err_msg = NULL;
 	game->m_p->tmp = NULL;
 	game->img_player[0] = NULL;
 	game->img_player[1] = NULL;

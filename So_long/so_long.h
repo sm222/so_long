@@ -6,7 +6,7 @@
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 18:19:42 by anboisve          #+#    #+#             */
-/*   Updated: 2023/02/06 16:19:48 by anboisve         ###   ########.fr       */
+/*   Updated: 2023/02/07 11:25:47 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,6 @@ typedef struct s_main
 	size_t		move;
 	int			frame;
 	char		*s;
-	char		*err_msg;
 	t_map		*m_p;
 }	t_main;
 
