@@ -32,34 +32,38 @@ OBJS	=	$(SRCS:.c=.o)
 
 USER = $(shell whoami)
 
-all: $(NAME)
-	@ echo $(shell reset)$(GRN)
-	@ echo "				so_long made by anboisve\n " $(RESET)
-	@ cat logo.txt
-	@ echo $(CYN) "\n\n			correction is made by $(USER)\n\n " $(RESET)
+all: libft $(NAME)
+	@echo $(shell reset)$(GRN)
+	@echo "				so_long made by anboisve\n " $(RESET)
+	@cat logo.txt
+	@echo $(CYN) "\n\n			correction is made by $(USER)\n\n " $(RESET)
 # Generates output file
+libft: 
+	@$(MAKE) -C $(LDIR)
+
 $(NAME): $(OBJS)
-	@ $(MAKE) -C $(LDIR)
-	@ $(CC) $(CFLAGS) $(SRCS) -lmlx -framework OpenGL -framework AppKit $(LDIR)$(LIBFT) -o $(NAME) -D NAME=\"$(USER)\"
+	@$(CC) $(CFLAGS) $(SRCS) -lmlx -framework OpenGL -framework AppKit $(LDIR)$(LIBFT) -o $(NAME) -D NAME=\"$(USER)\"
 # Removes objects
 clean:
 	$(RM) $(OBJS)
 	$(RM) $(LDIR)*.o
-	@ echo $(shell clear) $(GRN) clean *.o$(RESET)
+	@echo $(shell clear) $(GRN) clean *.o$(RESET)
 
 # Removes objects and executables
 fclean: clean
 	$(RM) $(NAME)
 	$(RM) $(LDIR)$(LIBFT)
-	@ echo $(shell clear) $(GRN) clean all$(RESET)
+	@echo $(shell clear) $(GRN) clean all$(RESET)
 
 run: all
-	@ ./so_long
+	@./so_long
 
 mc: all clean
-	@ ./so_long
+	@./so_long
 
 mem: all
 	leaks -atExit -- ./so_long maps/map.ber
 # Removes objects and executables and remakes
 re: fclean all
+
+.PHONY: all libft
