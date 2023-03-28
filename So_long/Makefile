@@ -46,13 +46,13 @@ $(NAME): $(OBJS)
 # Removes objects
 clean:
 	$(RM) $(OBJS)
-	$(RM) $(LDIR)*.o
+	@make -C $(LDIR) clean
 	@echo $(shell clear) $(GRN) clean *.o$(RESET)
 
 # Removes objects and executables
 fclean: clean
 	$(RM) $(NAME)
-	$(RM) $(LDIR)$(LIBFT)
+	@make -C $(LDIR) fclean
 	@echo $(shell clear) $(GRN) clean all$(RESET)
 
 run: all
