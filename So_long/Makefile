@@ -30,6 +30,9 @@ SRCS	=	main.c\
 
 OBJS	=	$(SRCS:.c=.o)
 
+%.o: %.c
+	$(CC) -Wall -Wextra -Werror -I/usr/include -Imlx_linux -O3 -c $< -o $@
+
 USER = $(shell whoami)
 
 all: libft $(NAME)
@@ -41,8 +44,10 @@ all: libft $(NAME)
 libft: 
 	@$(MAKE) -C $(LDIR)
 
+
 $(NAME): $(OBJS)
-	@$(CC) $(CFLAGS) $(SRCS) -lmlx -framework OpenGL -framework AppKit $(LDIR)$(LIBFT) -o $(NAME) -D NAME=\"$(USER)\"
+	$(CC) $(OBJS) $(LDIR)$(LIBFT) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME) -D NAME=\"$(USER)\"
+
 # Removes objects
 clean:
 	$(RM) $(OBJS)

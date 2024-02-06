@@ -6,7 +6,7 @@
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 09:46:35 by anboisve          #+#    #+#             */
-/*   Updated: 2022/12/07 17:13:06 by anboisve         ###   ########.fr       */
+/*   Updated: 2024/02/06 08:54:20 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	size_t	i;
-
-	i = 0;
 	if (dst == NULL || src == NULL)
 		return (NULL);
 	if (src < dst)

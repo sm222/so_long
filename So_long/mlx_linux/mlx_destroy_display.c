@@ -1,29 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   mlx_destroy_display.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: mg <mg@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/21 19:19:59 by anboisve          #+#    #+#             */
-/*   Updated: 2024/02/06 08:55:24 by anboisve         ###   ########.fr       */
+/*   Created: 2020/10/03 18:56:35 by mg                #+#    #+#             */
+/*   Updated: 2020/10/04 01:55:35 by mg               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "mlx_int.h"
 
-char	*ft_strrchr(const char *s, int c)
+int	mlx_destroy_display(t_xvar *xvar)
 {
-	int	i;
-
-	if (!s)
-		return (NULL);
-	i = (int)ft_strlen(s);
-	while (i >= 0)
-	{
-		if (((char *)s)[i] == (char)c)
-			return (((char *)s) + i);
-		i--;
-	}
-	return (NULL);
+	XCloseDisplay(xvar->display);
 }
