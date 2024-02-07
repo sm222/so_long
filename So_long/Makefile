@@ -12,6 +12,8 @@ NAME	=	so_long
 LIBFT	=	libft.a
 LDIR	=	lib_ft/
 
+USER = $(shell whoami)
+
 # Compiler and flags
 CC		=	gcc
 CFLAGS	=	-Wall -Werror -Wextra
@@ -31,9 +33,8 @@ SRCS	=	main.c\
 OBJS	=	$(SRCS:.c=.o)
 
 %.o: %.c
-	$(CC) -Wall -Wextra -Werror -I/usr/include -Imlx_linux -O3 -c $< -o $@
+	$(CC) -Wall -Wextra -Werror -D NAME=\"$(USER)\" -I/usr/include -Imlx_linux -O3 -c $< -o $@ 
 
-USER = $(shell whoami)
 
 all: libft $(NAME)
 	@echo $(shell reset)$(GRN)
@@ -46,7 +47,7 @@ libft:
 
 
 $(NAME): $(OBJS)
-	$(CC) $(OBJS) $(LDIR)$(LIBFT) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME) -D NAME=\"$(USER)\"
+	$(CC) $(OBJS) $(LDIR)$(LIBFT) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
 
 # Removes objects
 clean:

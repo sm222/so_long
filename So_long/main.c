@@ -6,7 +6,7 @@
 /*   By: anboisve <anboisve@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 09:23:33 by anboisve          #+#    #+#             */
-/*   Updated: 2023/02/07 11:25:53 by anboisve         ###   ########.fr       */
+/*   Updated: 2024/02/06 21:37:07 by anboisve         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,18 +68,18 @@ void	ft_null(t_main *game)
 */
 int	player_input(int key, t_main *game)
 {
-	if (key == 53)
+	if (key == 53 || key == 65307)
 		ft_exit(game, ft_combine("Goodbye!"), 0);
-	if (key == 13 || key == 126)
+	if (key == 'w' || key == 126)
 		move_player(game, 0, -1);
-	if (key == 1 || key == 125)
+	if (key == 's' || key == 125)
 		move_player(game, 0, 1);
-	if (key == 2 || key == 124)
+	if (key == 2 || key == 'd')
 	{
 		move_player(game, 1, 0);
 		game->p_dir = 0;
 	}
-	if (key == 0 || key == 123)
+	if (key == 0 || key == 'a')
 	{
 		move_player(game, -1, 0);
 		game->p_dir = 1;
@@ -125,8 +125,9 @@ int	main(int ac, char **av)
 	map.m_y * PIC_S, "so_long");
 	if (!game.win_p)
 		ft_exit(&game, ft_combine(ERR_MLX_WIN), 1);
+	mlx_do_key_autorepeaton(game.mlx);
 	mlx_loop_hook(game.mlx, print_map, &game);
-	mlx_hook(game.win_p, 02, 0L, player_input, &game);
+	mlx_key_hook(game.win_p, &player_input, &game);
 	mlx_hook(game.win_p, 17, 0, ft_escape, &game);
 	mlx_loop(game.mlx);
 	return (0);
